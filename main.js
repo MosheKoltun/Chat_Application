@@ -4,7 +4,6 @@ init(); // not using self invoking function because exports cannot work with it
 // init
 //===========================================================================
 function init(){
-    usersList = [];
     menuInit = require('./menu.js');
     main();
 };

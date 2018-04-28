@@ -1,3 +1,8 @@
+(function init(){
+    usersList = [];
+})();
+
+//========================================================
 function User(name, password, age) {
     this.name = name;
     this.password = password;
@@ -20,4 +25,18 @@ User.prototype.setAge = function (age) {
     this.age = age;
 }
 //========================================================
-module.exports = User;
+function createNewUser(name, password, age) {
+    var newUser = new User(name, password, age);
+    usersList.push(newUser);
+}
+//========================================================
+function getListOfUserNames() {
+    var listOfUsernames = [];
+    for(var i=0; i<usersList.length; i++) {
+        listOfUsernames.push(usersList[i].getName());
+    }
+    return listOfUsernames;
+}
+//=========================================================
+module.exports.createNewUser = createNewUser;
+module.exports.getListOfUserNames = getListOfUserNames;
