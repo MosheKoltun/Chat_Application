@@ -136,7 +136,7 @@ function showGroupsMenu() {
 // askUserForData
 //===========================================================================
 function askUserForData() {
-
+    var userInput = {};
     // Clear screen
     console.clear();
 
@@ -158,19 +158,19 @@ function askUserForData() {
             console.log('Error username already exists!');
             menu.question('Please Enter Username:\n', processInput1);
         } else {
-            newUser = users.createNewUser();
-            newUser.setUsername(input);
+            userInput.username=input;
             menu.question('Please Enter Password:\n', processInput2);
         }
     }
 
     function processInput2(input) {
-        newUser.setPassword(input);
+        userInput.password=input;
         menu.question('Please Enter Age:\n', processInput3);
     }
 
     function processInput3(input) {
-        newUser.setAge(input);
+        userInput.age=input;
+        newUser = users.createNewUser(userInput.username, userInput.password, userInput.age);
         showUserMenu();
     }
 }

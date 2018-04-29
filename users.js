@@ -3,10 +3,10 @@
 })();
 
 //========================================================
-function User() {
-    this.username = "";
-    this.password = "";
-    this.age = 0;
+function User(username, password, age) {
+    this.username = username;
+    this.password = password;
+    this.age = age;
 }
 //========================================================
 User.prototype.setUsername = function (username) {
@@ -25,8 +25,8 @@ User.prototype.setAge = function (age) {
     this.age = age;
 }
 //========================================================
-function createNewUser() {
-    var newUser = new User();
+function createNewUser(username, password, age) {
+    var newUser = new User(username, password, age);
     userObjectList.push(newUser);
     return newUser;
 }
@@ -48,9 +48,10 @@ function doesUserExist(username) {
                 return true; // user exist. Return from function immediately
             }
         }
-    return false;
-    // user does not exist
-    // or in case 'userObjectList' is empty
+    }
+        return false;
+        // user does not exist
+        // or in case 'userObjectList' is empty
 }
 //=========================================================
 function removeUser(username) {

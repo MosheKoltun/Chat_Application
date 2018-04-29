@@ -12,7 +12,7 @@ function init(){
 // main
 //===========================================================================
 function main(){
-    var users = [];
+    //var users = [];
     //var users = [new User('Itay'), new User('Yuval')];
     menuInit();
 }
