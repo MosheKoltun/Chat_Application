@@ -1,5 +1,5 @@
 (function init(){
-    usersList = [];
+    usersList = {};
 })();
 
 //========================================================
@@ -27,13 +27,13 @@ User.prototype.setAge = function (age) {
 //========================================================
 function createNewUser(name, password, age) {
     var newUser = new User(name, password, age);
-    usersList.push(newUser);
+    usersList[name] = newUser;
 }
 //========================================================
 function getListOfUserNames() {
     var listOfUsernames = [];
-    for(var i=0; i<usersList.length; i++) {
-        listOfUsernames.push(usersList[i].getName());
+    for(user in usersList) {
+        listOfUsernames.push(usersList[user].getName());
     }
     return listOfUsernames;
 }
