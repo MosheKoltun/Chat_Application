@@ -85,6 +85,7 @@ function showUserMenu() {
     menu.question('Where to go? ', function(input) {
         switch(input) {
             case '1': askUserForData(); break;
+            case '2': removeUserWithQuestion(); break;
             case '4': printListOfUserNames(); break;
             case '5': showMainMenu(); break;
             default: showUserMenu() /* show menu again if input does not match */;
@@ -136,8 +137,6 @@ function showGroupsMenu() {
 //===========================================================================
 function askUserForData() {
 
-    var newUserData = {};
-
     // Clear screen
     console.clear();
 
@@ -154,23 +153,24 @@ function askUserForData() {
     menu.question('Please Enter Username:\n', processInput1);
 
     function processInput1(input) {
-        //if (isUsernameUnique()) {
-        if (true) {
-            newUserData['name'] = input;
-            menu.question('Please Enter Password:\n', processInput2);
-        } else {
+        if (users.doesUserExist(input)) { // check if username is not unique
+            console.clear();
+            console.log('Error username already exists!');
             menu.question('Please Enter Username:\n', processInput1);
+        } else {
+            newUser = users.createNewUser();
+            newUser.setUsername(input);
+            menu.question('Please Enter Password:\n', processInput2);
         }
     }
 
     function processInput2(input) {
-        newUserData['password'] = input;
+        newUser.setPassword(input);
         menu.question('Please Enter Age:\n', processInput3);
     }
 
     function processInput3(input) {
-        newUserData['age'] = input;
-        users.createNewUser(newUserData['name'], newUserData['password'], newUserData['age']);
+        newUser.setAge(input);
         showUserMenu();
     }
 }
@@ -196,6 +196,37 @@ function printListOfUserNames() {
     menu.question('Press any key to continue...', processInput1);
 
     function processInput1(input) {
+        showUserMenu();
+    }
+}
+
+//===========================================================================
+// printListOfUserNames
+//===========================================================================
+function removeUserWithQuestion() {
+    console.clear();
+
+    if(menu) menu.close();
+
+    // Creates a readline Interface instance
+    menu = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+    });
+
+    menu.question('Please enter username to be removed:\n', processInput1);
+
+    function processInput1(input) {
+        var res = users.removeUser(input);
+        if (res){
+            console.log('Username was successfully removed!');
+        } else {
+            console.log('Username does not exist!');
+        }
+        menu.question('Press any key to continue...', processInput2);
+    }
+
+    function processInput2(input) {
         showUserMenu();
     }
 }

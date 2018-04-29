@@ -1,20 +1,20 @@
 (function init(){
-    usersList = {};
+    userObjectList = []; // values = 'User' objects
 })();
 
 //========================================================
-function User(name, password, age) {
-    this.name = name;
-    this.password = password;
-    this.age = age;
+function User() {
+    this.username = "";
+    this.password = "";
+    this.age = 0;
 }
 //========================================================
-User.prototype.setName = function (name) {
-    this.name = name;
+User.prototype.setUsername = function (username) {
+    this.username = username;
 }
 //========================================================
-User.prototype.getName = function () {
-    return this.name;
+User.prototype.getUsername = function () {
+    return this.username;
 }
 //========================================================
 User.prototype.setPassword = function (password) {
@@ -25,18 +25,48 @@ User.prototype.setAge = function (age) {
     this.age = age;
 }
 //========================================================
-function createNewUser(name, password, age) {
-    var newUser = new User(name, password, age);
-    usersList[name] = newUser;
+function createNewUser() {
+    var newUser = new User();
+    userObjectList.push(newUser);
+    return newUser;
 }
 //========================================================
 function getListOfUserNames() {
-    var listOfUsernames = [];
-    for(user in usersList) {
-        listOfUsernames.push(usersList[user].getName());
+    var usernameList = [];
+    if (userObjectList.length > 0) {
+        for (var i = 0; i < userObjectList.length; i++) {
+            usernameList.push(userObjectList[i].getUsername());
+        }
     }
-    return listOfUsernames;
+    return usernameList;
 }
 //=========================================================
+function doesUserExist(username) {
+    if (userObjectList.length > 0) {
+        for (var i = 0; i < userObjectList.length; i++) {
+            if (userObjectList[i].getUsername() === username) {
+                return true; // user exist. Return from function immediately
+            }
+        }
+    return false;
+    // user does not exist
+    // or in case 'userObjectList' is empty
+}
+//=========================================================
+function removeUser(username) {
+    for(var i=0; i<userObjectList.length; i++) {
+        if (userObjectList[i].getUsername() === username){
+            userObjectList.splice(i,1); // delete an array member and reindex.
+            return true;
+        }
+    }
+    return false;
+}
+//=========================================================
+module.exports.User = User;
 module.exports.createNewUser = createNewUser;
 module.exports.getListOfUserNames = getListOfUserNames;
+module.exports.doesUserExist = doesUserExist;
+module.exports.removeUser = removeUser;
+
+
