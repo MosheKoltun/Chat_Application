@@ -19,9 +19,9 @@ function createNewUser(username, password, age) {
 }
 //========================================================
 function doesUserExist(username) {
-    if (userObjectList.length > 0) {
+    if (userObjectList.length === 0) {
         for (var i = 0; i < userObjectList.length; i++) {
-            if (userObjectList[i].getUsername() === username) {
+            if (userObjectList[i].getName() === username) {
                 return true; //
                 // If user exist. Return from function immediately
             }
@@ -36,7 +36,7 @@ function getListOfUserNames() {
     var usernameList = [];
     if (userObjectList.length > 0) {
         for (var i = 0; i < userObjectList.length; i++) {
-            usernameList.push(userObjectList[i].getUsername());
+            usernameList.push(userObjectList[i].getName());
         }
     }
     return usernameList;
@@ -44,7 +44,7 @@ function getListOfUserNames() {
 //=========================================================
 function removeUser(username) {
     for(var i=0; i<userObjectList.length; i++) {
-        if (userObjectList[i].getUsername() === username){
+        if (userObjectList[i].getName() === username){
             userObjectList.splice(i,1);
             // Delete an array member
             return true;
@@ -55,7 +55,7 @@ function removeUser(username) {
 //=========================================================
 function updateUsername(oldUsername, newUsername) {
     for(var i=0; i<userObjectList.length; i++) {
-        if (userObjectList[i].getUsername() === oldUsername){
+        if (userObjectList[i].getName() === oldUsername){
             userObjectList[i].setUsername(newUsername);
             return true;
         }
@@ -65,7 +65,7 @@ function updateUsername(oldUsername, newUsername) {
 //=========================================================
 function updateUserAge(username, newUserAge) {
     for(var i=0; i<userObjectList.length; i++) {
-        if (userObjectList[i].getUsername() === username){
+        if (userObjectList[i].getName() === username){
             userObjectList[i].setAge(newUserAge);
             return true;
         }

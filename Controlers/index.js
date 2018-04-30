@@ -1,10 +1,13 @@
-const readline = require('readline');
+const groupFuncs = require('../Modules/groups.js');
 const userFuncs = require('../Modules/users.js');
+
+const readline = require('readline');
+
 var menu = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
-
+//===========================================================================
 showMainMenu();
 
 //===========================================================================
@@ -17,13 +20,15 @@ function showMainMenu() {
         '===============\n' +
         '1 = Users Menu \n' +
         '2 = Groups Menu\n' +
-        '3 = Exit         '
+        '3 = Chat Menu  \n' +
+        '4 = Exit         '
     );
     menu.question('Where to go? ', function(input) {
         switch(input) {
             case '1': showUserMenu(); break;
             case '2': showGroupsMenu(); break;
-            case '3': process.exit(); break;
+            case '3': showChatMenu(); break;
+            case '4': process.exit(); break;
             default: showMainMenu() /* show menu again if input does not match */;
         }
     });
@@ -44,9 +49,9 @@ function showUserMenu() {
     );
     menu.question('Where to go? ', function(input) {
         switch(input) {
-            case '1': askUserForData(); break;
-            case '2': removeUserWithQuestion(); break;
-            case '3': updateUserProfileMenu(); break;
+            case '1': createNewUser(); break;
+            case '2': removeUser(); break;
+            case '3': showUpdateUserProfileMenu(); break;
             case '4': printListOfUserNames(); break;
             case '5': showMainMenu(); break;
             default:  showUserMenu() /* show menu again if input does not match */;
@@ -56,7 +61,7 @@ function showUserMenu() {
 //===========================================================================
 // updateUserProfile
 //===========================================================================
-function updateUserProfileMenu() {
+function showUpdateUserProfileMenu() {
     console.clear();
     console.log(
         'User Menu              \n' +
@@ -70,7 +75,7 @@ function updateUserProfileMenu() {
             case '1': updateUsername(); break;
             case '2': updateUserAge(); break;
             case '3': showUserMenu(); break;
-            default:  updateUserProfileMenu() /* show menu again if input does not match */;
+            default:  showUpdateUserProfileMenu() /* show menu again if input does not match */;
         }
     });
 }
@@ -86,23 +91,42 @@ function showGroupsMenu() {
         '1 = Create New Group            \n' +
         '2 = Remove Group                \n' +
         '3 = Get List of Groups          \n' +
-        '--------------------------------\n' +
-        '4 = Add User To Group           \n' +
-        '5 = Remove User From Group      \n' +
-        '6 = Show List Of Group And Users\n' +
-        '7 = Go back to main               '
+        '4 = Go back to main               '
     );
     menu.question('Where to go? ', function(input) {
         switch(input) {
-            case '7': showMainMenu(); break;
+            case '1' : createNewGroup(); break;
+            case '2' : removeGroup(); break;
+            case '3' : printListOfGroupNames(); break;
+            case '4': showMainMenu(); break;
             default: showGroupsMenu() /* show menu again if input does not match */;
         }
     });
 }
 //===========================================================================
-// askUserForData
+// showChatMenu
 //===========================================================================
-function askUserForData() {
+function showChatMenu() {
+    console.clear();
+    console.log(
+        'Chat Menu                     \n' +
+        '================================\n' +
+        '1 = Add User To Group           \n' +
+        '2 = Remove User From Group      \n' +
+        '3 = Show List Of Group And Users\n' +
+        '4 = Go back to main               '
+    );
+    menu.question('Where to go? ', function(input) {
+        switch(input) {
+            case '4': showMainMenu(); break;
+            default: showGroupsMenu() /* show menu again if input does not match */;
+        }
+    });
+}
+//===========================================================================
+// createNewUser
+//===========================================================================
+function createNewUser() {
     var userInput = {};
     console.clear();
     menu.question('Please Enter Username:\n', processInput1);
@@ -123,7 +147,7 @@ function askUserForData() {
     }
     function processInput3(input) {
         userInput.age=input;
-        newUser = userFuncs.createNewUser(userInput.username, userInput.password, userInput.age);
+        userFuncs.createNewUser(userInput.username, userInput.password, userInput.age);
         showUserMenu();
     }
 }
@@ -144,7 +168,7 @@ function printListOfUserNames() {
 //===========================================================================
 // removeUserWithQuestion
 //===========================================================================
-function removeUserWithQuestion() {
+function removeUser() {
     console.clear();
     menu.question('Please enter username to be removed:\n', processInput1);
     function processInput1(input) {
@@ -161,9 +185,12 @@ function removeUserWithQuestion() {
     }
 }
 //===========================================================================
+// updateUsername
+//===========================================================================
 function updateUsername() {
     console.clear();
     menu.question('Please enter old username:\n', processInput1);
+    var oldUsername = null;
 
     function processInput1(input) {
         oldUsername = input;
@@ -175,44 +202,93 @@ function updateUsername() {
             menu.question('Press any key to continue...', processInput3);
         }
     }
-
     function processInput2(input) {
         var newUsername = input;
         userFuncs.updateUsername(oldUsername, newUsername);
         console.log('Username was successfully changed!');
         menu.question('Press any key to continue...', processInput3);
     }
-
     function processInput3(input) {
-        updateUserProfileMenu();
+        showUpdateUserProfileMenu();
     }
 }
-
+//===========================================================================
+// updateUserAge
 //===========================================================================
 function updateUserAge(){
-        console.clear();
-        menu.question('Please enter username:\n', processInput1);
-
-        function processInput1(input) {
-            username = input;
-            var res =  userFuncs.doesUserExist(username);
-            if (res) {
-                menu.question('Please enter new age:\n', processInput2);
-            } else {
-                console.log('Username does not exist!');
-                menu.question('Press any key to continue...', processInput3);
-            }
-        }
-
-        function processInput2(input) {
-            var newUserAge = input;
-            userFuncs.updateUserAge(username, newUserAge);
-            console.log('User age was successfully changed!');
+    console.clear();
+    menu.question('Please enter username:\n', processInput1);
+    var username = null;
+    function processInput1(input) {
+        username = input;
+        var res =  userFuncs.doesUserExist(username);
+        if (res) {
+            menu.question('Please enter new age:\n', processInput2);
+        } else {
+            console.log('Username does not exist!');
             menu.question('Press any key to continue...', processInput3);
         }
-
-        function processInput3(input) {
-            updateUserProfileMenu();
+    }
+    function processInput2(input) {
+        var newUserAge = input;
+        userFuncs.updateUserAge(username, newUserAge);
+        console.log('User age was successfully changed!');
+        menu.question('Press any key to continue...', processInput3);
+    }
+    function processInput3(input) {
+        showUpdateUserProfileMenu();
+    }
+}
+//===========================================================================
+// createNewGroup
+//===========================================================================
+function createNewGroup() {
+    console.clear();
+    menu.question('Please Enter Group Name:\n', processInput1);
+    function processInput1(input) {
+        if (groupFuncs.doesGroupExist(input)) {
+            // check if group name is not unique
+            console.clear();
+            console.log('Error Group name already exists!');
+            menu.question('Please Enter Group Name:\n', processInput1);
+        } else {
+            groupFuncs.createNewGroup(input);
+            showGroupsMenu();
         }
     }
+}
+//===========================================================================
+// printListOfGroupNames
+//===========================================================================
+function printListOfGroupNames() {
+    console.clear();
+    var listOfGroupNames = groupFuncs.getListOfGroupNames();
+    for(var i=0; i<listOfGroupNames.length; i++) {
+        console.log(listOfGroupNames[i]);
+    }
+    menu.question('Press any key to continue...', processInput1);
+
+    function processInput1(input) {
+        showGroupsMenu();
+    }
+}
+//===========================================================================
+// removeGroup
+//===========================================================================
+function removeGroup() {
+    console.clear();
+    menu.question('Please enter group name to be removed:\n', processInput1);
+    function processInput1(input) {
+        var res = groupFuncs.removeGroup(input);
+        if (res){
+            console.log('Group name was successfully removed!');
+        } else {
+            console.log('Group name does not exist!');
+        }
+        menu.question('Press any key to continue...', processInput2);
+    }
+    function processInput2(input) {
+        showGroupsMenu();
+    }
+}
 

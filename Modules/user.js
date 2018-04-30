@@ -6,7 +6,7 @@ function User(username, password, age) {
     this.age = age;
 }
 //========================================================
-User.prototype.getUsername = function () {
+User.prototype.getName = function () {
     return this.username;
 }
 //========================================================
