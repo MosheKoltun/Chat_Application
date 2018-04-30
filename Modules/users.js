@@ -1,0 +1,76 @@
+const User = require('./user.js');
+//========================================================
+// Array of 'User' Objects
+var userObjectList = [];
+//========================================================
+module.exports = {
+    createNewUser:createNewUser,
+    getListOfUserNames:getListOfUserNames,
+    doesUserExist:doesUserExist,
+    removeUser:removeUser,
+    updateUsername:updateUsername,
+    updateUserAge:updateUserAge,
+};
+//========================================================
+function createNewUser(username, password, age) {
+    var newUser = new User(username, password, age);
+    userObjectList.push(newUser);
+    return newUser;
+}
+//========================================================
+function doesUserExist(username) {
+    if (userObjectList.length > 0) {
+        for (var i = 0; i < userObjectList.length; i++) {
+            if (userObjectList[i].getUsername() === username) {
+                return true; //
+                // If user exist. Return from function immediately
+            }
+        }
+    }
+    return false;
+    // If user does not exist
+    // or in case 'userObjectList' is empty
+}
+//=========================================================
+function getListOfUserNames() {
+    var usernameList = [];
+    if (userObjectList.length > 0) {
+        for (var i = 0; i < userObjectList.length; i++) {
+            usernameList.push(userObjectList[i].getUsername());
+        }
+    }
+    return usernameList;
+}
+//=========================================================
+function removeUser(username) {
+    for(var i=0; i<userObjectList.length; i++) {
+        if (userObjectList[i].getUsername() === username){
+            userObjectList.splice(i,1);
+            // Delete an array member
+            return true;
+        }
+    }
+    return false;
+}
+//=========================================================
+function updateUsername(oldUsername, newUsername) {
+    for(var i=0; i<userObjectList.length; i++) {
+        if (userObjectList[i].getUsername() === oldUsername){
+            userObjectList[i].setUsername(newUsername);
+            return true;
+        }
+    }
+    return false;
+}
+//=========================================================
+function updateUserAge(username, newUserAge) {
+    for(var i=0; i<userObjectList.length; i++) {
+        if (userObjectList[i].getUsername() === username){
+            userObjectList[i].setAge(newUserAge);
+            return true;
+        }
+    }
+    return false;
+}
+
+
