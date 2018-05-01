@@ -10,6 +10,7 @@ module.exports = {
     removeUser:removeUser,
     updateUsername:updateUsername,
     updateUserAge:updateUserAge,
+    getUserObjectList,getUserObjectList,
 };
 //========================================================
 function createNewUser(username, password, age) {
@@ -20,16 +21,17 @@ function createNewUser(username, password, age) {
 //========================================================
 function doesUserExist(username) {
     if (userObjectList.length === 0) {
-        for (var i = 0; i < userObjectList.length; i++) {
-            if (userObjectList[i].getName() === username) {
-                return true; //
-                // If user exist. Return from function immediately
-            }
+        return null;
+        // in case 'userObjectList' is empty
+    }
+    for (var i = 0; i < userObjectList.length; i++) {
+        if (userObjectList[i].getName() === username) {
+            return userObjectList[i]; //
+            // If user exist. Return from function immediately
         }
     }
-    return false;
+    return null;
     // If user does not exist
-    // or in case 'userObjectList' is empty
 }
 //=========================================================
 function getListOfUserNames() {
@@ -71,6 +73,10 @@ function updateUserAge(username, newUserAge) {
         }
     }
     return false;
+}
+//=========================================================
+function getUserObjectList() {
+    return userObjectList;
 }
 
 

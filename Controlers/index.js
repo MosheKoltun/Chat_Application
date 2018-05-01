@@ -1,5 +1,6 @@
-const groupFuncs = require('../Modules/groups.js');
 const userFuncs = require('../Modules/users.js');
+const groupFuncs = require('../Modules/groups.js');
+const chatFuncs = require('../Modules/chat.js');
 
 const readline = require('readline');
 
@@ -118,8 +119,11 @@ function showChatMenu() {
     );
     menu.question('Where to go? ', function(input) {
         switch(input) {
+            case '1': addUserToGroup(); break;
+            case '2': removeUserFromGroup(); break;
+            case '3': printListOfGroupAndUsers(); break;
             case '4': showMainMenu(); break;
-            default: showGroupsMenu() /* show menu again if input does not match */;
+            default: showChatMenu() /* show menu again if input does not match */;
         }
     });
 }
@@ -131,14 +135,19 @@ function createNewUser() {
     console.clear();
     menu.question('Please Enter Username:\n', processInput1);
     function processInput1(input) {
-        if (userFuncs.doesUserExist(input)) {
+        var userObject = userFuncs.doesUserExist(input);
+        if (userObject!=null) {
             // check if username is not unique
             console.clear();
             console.log('Error username already exists!');
             menu.question('Please Enter Username:\n', processInput1);
         } else {
-            userInput.username=input;
-            menu.question('Please Enter Password:\n', processInput2);
+            if (input === "") {
+                menu.question('Field is empty. Please enter username again:\n', processInput1);
+            } else {
+                userInput.username = input;
+                menu.question('Please Enter Password:\n', processInput2);
+            }
         }
     }
     function processInput2(input) {
@@ -194,8 +203,8 @@ function updateUsername() {
 
     function processInput1(input) {
         oldUsername = input;
-        var res =  userFuncs.doesUserExist(oldUsername);
-        if (res) {
+        var userObject = userFuncs.doesUserExist(input);
+        if (userObject!=null) {
             menu.question('Please enter new username:\n', processInput2);
         } else {
             console.log('Username does not exist!');
@@ -221,8 +230,8 @@ function updateUserAge(){
     var username = null;
     function processInput1(input) {
         username = input;
-        var res =  userFuncs.doesUserExist(username);
-        if (res) {
+        var userObject = userFuncs.doesUserExist(input);
+        if (userObject!=null) {
             menu.question('Please enter new age:\n', processInput2);
         } else {
             console.log('Username does not exist!');
@@ -245,15 +254,21 @@ function updateUserAge(){
 function createNewGroup() {
     console.clear();
     menu.question('Please Enter Group Name:\n', processInput1);
+
     function processInput1(input) {
-        if (groupFuncs.doesGroupExist(input)) {
-            // check if group name is not unique
-            console.clear();
-            console.log('Error Group name already exists!');
-            menu.question('Please Enter Group Name:\n', processInput1);
+        if (input === "") {
+            menu.question('Field is empty. Please enter group name again:\n', processInput1);
         } else {
-            groupFuncs.createNewGroup(input);
-            showGroupsMenu();
+            var groupObject = groupFuncs.doesGroupExist(input);
+            if (groupObject != null) {
+                // check if group name is not unique
+                console.clear();
+                console.log('Error Group name already exists!');
+                menu.question('Please Enter Group Name:\n', processInput1);
+            } else {
+                groupFuncs.createNewGroup(input);
+                showGroupsMenu();
+            }
         }
     }
 }
@@ -291,4 +306,97 @@ function removeGroup() {
         showGroupsMenu();
     }
 }
+//===========================================================================
+// addUserToGroup
+//===========================================================================
+function addUserToGroup() {
+    console.clear();
+    var groupName = null;
+    var username = null;
+
+    menu.question('Please enter group name:\n', processInput1);
+
+    function processInput1(input) {
+        groupName = input;
+        menu.question('Please enter username:\n', processInput2);
+    }
+
+    function processInput2(input) {
+        username = input;
+
+        var res = chatFuncs.addUserToGroup(groupName, username);
+        if (res){
+            console.log('User was successfully added to the group!');
+        } else {
+            console.log('Failed!');
+        }
+        menu.question('Press any key to continue...', processInput3);
+    }
+
+    function processInput3(input) {
+        showChatMenu();
+    }
+}
+//===========================================================================
+// removeUserFromGroup
+//===========================================================================
+function removeUserFromGroup() {
+    console.clear();
+    var groupName = null;
+    var username = null;
+
+    menu.question('Please enter group name:\n', processInput1);
+
+    function processInput1(input) {
+        groupName = input;
+        menu.question('Please enter username:\n', processInput2);
+    }
+
+    function processInput2(input) {
+        username = input;
+
+        var res = chatFuncs.removeUserFromGroup(groupName, username);
+        if (res){
+            console.log('User was successfully removed from the group!');
+        } else {
+            console.log('Group/User name does not exist!');
+        }
+        menu.question('Press any key to continue...', processInput3);
+    }
+
+    function processInput3(input) {
+        showChatMenu();
+    }
+}
+//===========================================================================
+// getListOfGroupAndUsers
+//===========================================================================
+function printListOfGroupAndUsers() {
+    console.clear();
+
+    var listOfGroupAndUsers=chatFuncs.getListOfGroupAndUsers();
+
+    for(var groupName in listOfGroupAndUsers) {
+        console.log(groupName);
+
+        var listOfUsernamesAndAges = listOfGroupAndUsers[groupName];
+
+        for (var username in listOfUsernamesAndAges) {
+
+            var age = listOfUsernamesAndAges[username];
+
+            console.log("   " + username + " (" + age + ")");
+        }
+    }
+    console.log(listOfGroupAndUsers);
+
+    menu.question('Press any key to continue...', processInput1);
+
+    function processInput1(input) {
+        showChatMenu();
+    }
+}
+
+
+
 

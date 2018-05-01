@@ -8,6 +8,9 @@ module.exports = {
     getListOfGroupNames:getListOfGroupNames,
     doesGroupExist:doesGroupExist,
     removeGroup:removeGroup,
+    addUserToGroup:addUserToGroup,
+    removeUserFromGroup,removeUserFromGroup,
+    getGroupObjectList,getGroupObjectList,
 };
 //========================================================
 function createNewGroup(GroupName) {
@@ -17,38 +20,62 @@ function createNewGroup(GroupName) {
 }
 //========================================================
 function doesGroupExist(GroupName) {
-    if (groupObjectList.length > 0) {
-        for (var i = 0; i < groupObjectList.length; i++) {
-            if (groupObjectList[i].getName() === GroupName) {
-                return true; //
-                // If user exist. Return from function immediately
-            }
+    if (groupObjectList.length === 0) {
+        return null;
+        // in case 'groupObjectList' is empty
+    }
+    for (var i = 0; i < groupObjectList.length; i++) {
+        if (groupObjectList[i].getName() === GroupName) {
+            return groupObjectList[i]; //
+            // If user exist. Return from function immediately
         }
     }
-    return false;
+    return null;
     // If group does not exist
-    // or in case 'groupObjectList' is empty
 }
 //=========================================================
 function getListOfGroupNames() {
-    //console.log("inside getListOfGroupNames")
     var groupsList = [];
     if (groupObjectList.length > 0) {
         for (var i = 0; i < groupObjectList.length; i++) {
             groupsList.push(groupObjectList[i].getName());
         }
     }
-    //console.log("groupsList = " + groupsList);
     return groupsList;
 }
 //=========================================================
-function removeGroup(GroupName) {
+function removeGroup(groupName) {
     for(var i=0; i<groupObjectList.length; i++) {
-        if (groupObjectList[i].getName() === GroupName){
+        if (groupObjectList[i].getName() === groupName){
             groupObjectList.splice(i,1);
             // Delete an array member
             return true;
         }
     }
     return false;
+}
+//=========================================================
+function addUserToGroup(groupName, userObject) {
+    for (var i=0; i<groupObjectList.length; i++) {
+        if (groupObjectList[i].getName() === groupName) {
+            groupObjectList[i].addUser(userObject);
+            return true;
+        }
+    }
+    return false;
+}
+//=========================================================
+function removeUserFromGroup(groupName, userObject) {
+    for (var i = 0; i < groupObjectList.length; i++) {
+        if (groupObjectList[i].getName() === groupName) {
+            var username = userObject.getName();
+            groupObjectList[i].removeUser(username);
+            return true;
+        }
+    }
+    return false;
+}
+//=========================================================
+function getGroupObjectList() {
+    return groupObjectList;
 }
