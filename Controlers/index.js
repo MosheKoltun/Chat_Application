@@ -121,7 +121,7 @@ function showChatMenu() {
         switch(input) {
             case '1': addUserToGroup(); break;
             case '2': removeUserFromGroup(); break;
-            case '3': printListOfGroupAndUsers(); break;
+            case '3': printGroupsUsersDisplayTree(); break;
             case '4': showMainMenu(); break;
             default: showChatMenu() /* show menu again if input does not match */;
         }
@@ -170,7 +170,7 @@ function printListOfUserNames() {
         console.log(listOfUsernames[i]);
     }
     menu.question('Press any key to continue...', processInput1);
-    function processInput1(input) {
+    function processInput1() {
         showUserMenu();
     }
 }
@@ -189,7 +189,7 @@ function removeUser() {
         }
         menu.question('Press any key to continue...', processInput2);
     }
-    function processInput2(input) {
+    function processInput2() {
         showUserMenu();
     }
 }
@@ -217,7 +217,7 @@ function updateUsername() {
         console.log('Username was successfully changed!');
         menu.question('Press any key to continue...', processInput3);
     }
-    function processInput3(input) {
+    function processInput3() {
         showUpdateUserProfileMenu();
     }
 }
@@ -244,7 +244,7 @@ function updateUserAge(){
         console.log('User age was successfully changed!');
         menu.question('Press any key to continue...', processInput3);
     }
-    function processInput3(input) {
+    function processInput3() {
         showUpdateUserProfileMenu();
     }
 }
@@ -283,7 +283,7 @@ function printListOfGroupNames() {
     }
     menu.question('Press any key to continue...', processInput1);
 
-    function processInput1(input) {
+    function processInput1() {
         showGroupsMenu();
     }
 }
@@ -302,7 +302,7 @@ function removeGroup() {
         }
         menu.question('Press any key to continue...', processInput2);
     }
-    function processInput2(input) {
+    function processInput2() {
         showGroupsMenu();
     }
 }
@@ -333,7 +333,7 @@ function addUserToGroup() {
         menu.question('Press any key to continue...', processInput3);
     }
 
-    function processInput3(input) {
+    function processInput3() {
         showChatMenu();
     }
 }
@@ -364,35 +364,30 @@ function removeUserFromGroup() {
         menu.question('Press any key to continue...', processInput3);
     }
 
-    function processInput3(input) {
+    function processInput3() {
         showChatMenu();
     }
 }
 //===========================================================================
 // getListOfGroupAndUsers
 //===========================================================================
-function printListOfGroupAndUsers() {
+function printGroupsUsersDisplayTree() {
     console.clear();
 
-    var listOfGroupAndUsers=chatFuncs.getListOfGroupAndUsers();
+    var listOfGroupAndUsers=chatFuncs.createGroupsUsersDisplayTree();
 
     for(var groupName in listOfGroupAndUsers) {
-        console.log(groupName);
+        console.log("--> " + groupName);
 
         var listOfUsernamesAndAges = listOfGroupAndUsers[groupName];
-
         for (var username in listOfUsernamesAndAges) {
-
             var age = listOfUsernamesAndAges[username];
-
-            console.log("   " + username + " (" + age + ")");
+            console.log("----> " + username + " (" + age + ")");
         }
     }
-    console.log(listOfGroupAndUsers);
-
     menu.question('Press any key to continue...', processInput1);
 
-    function processInput1(input) {
+    function processInput1() {
         showChatMenu();
     }
 }
