@@ -3,7 +3,7 @@ const groupFuncs = require('../Modules/groups.js');
 const chatFuncs = require('../Modules/chat.js');
 
 const readline = require('readline');
-
+//===========================================================================
 var menu = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -114,15 +114,19 @@ function showChatMenu() {
         '================================\n' +
         '1 = Add User To Group           \n' +
         '2 = Remove User From Group      \n' +
-        '3 = Show List Of Group And Users\n' +
-        '4 = Go back to main               '
+        '3 = Add Group To Group          \n' +
+        '4 = Remove Group From Group     \n' +
+        '5 = Show List Of Group And Users\n' +
+        '6 = Go back to main               '
     );
     menu.question('Where to go? ', function(input) {
         switch(input) {
             case '1': addUserToGroup(); break;
             case '2': removeUserFromGroup(); break;
-            case '3': printGroupsUsersDisplayTree(); break;
-            case '4': showMainMenu(); break;
+            case '3': addGroupToGroup(); break;
+            case '4': removeGroupFromGroup(); break;
+            case '5': printGroupsUsersDisplayTree(); break;
+            case '6': showMainMenu(); break;
             default: showChatMenu() /* show menu again if input does not match */;
         }
     });
@@ -259,16 +263,13 @@ function createNewGroup() {
         if (input === "") {
             menu.question('Field is empty. Please enter group name again:\n', processInput1);
         } else {
-            var groupObject = groupFuncs.doesGroupExist(input);
-            if (groupObject != null) {
-                // check if group name is not unique
-                console.clear();
+            console.clear();
+            var res = groupFuncs.createNewGroup(input);
+            if (res===null) {
                 console.log('Error Group name already exists!');
                 menu.question('Please Enter Group Name:\n', processInput1);
-            } else {
-                groupFuncs.createNewGroup(input);
-                showGroupsMenu();
             }
+            showGroupsMenu();
         }
     }
 }
@@ -369,22 +370,75 @@ function removeUserFromGroup() {
     }
 }
 //===========================================================================
+// addGroupToGroup
+//===========================================================================
+function addGroupToGroup() {
+    console.clear();
+    var parentGroupName = null;
+    var childGroupName = null;
+
+    menu.question('Please enter parent group name:\n', processInput1);
+
+    function processInput1(input) {
+        parentGroupName = input;
+        menu.question('Please enter child group name:\n', processInput2);
+    }
+
+    function processInput2(input) {
+        childGroupName = input;
+
+        var res = chatFuncs.addGroupToGroup(parentGroupName, childGroupName);
+        if (res){
+            console.log('Child group was successfully added to the parent group!');
+        } else {
+            console.log('Failed!');
+        }
+        menu.question('Press any key to continue...', processInput3);
+    }
+
+    function processInput3() {
+        showChatMenu();
+    }
+}
+//===========================================================================
+// removeUserFromGroup
+//===========================================================================
+function removeGroupFromGroup() {
+    console.clear();
+    var parentGroupName = null;
+    var childGroupName = null;
+
+    menu.question('Please enter parent group name:\n', processInput1);
+
+    function processInput1(input) {
+        parentGroupName = input;
+        menu.question('Please enter child group name:\n', processInput2);
+    }
+
+    function processInput2(input) {
+        childGroupName = input;
+
+        var res = chatFuncs.removeGroupFromGroup(parentGroupName, childGroupName);
+        if (res){
+            console.log('Child group was successfully removed from the parent group!');
+        } else {
+            console.log('Failed!');
+        }
+        menu.question('Press any key to continue...', processInput3);
+    }
+
+    function processInput3() {
+        showChatMenu();
+    }
+}
+//===========================================================================
 // getListOfGroupAndUsers
 //===========================================================================
 function printGroupsUsersDisplayTree() {
     console.clear();
 
-    var listOfGroupAndUsers=chatFuncs.createGroupsUsersDisplayTree();
+    chatFuncs.printTree();
 
-    for(var groupName in listOfGroupAndUsers) {
-        console.log("--> " + groupName);
-
-        var listOfUsernamesAndAges = listOfGroupAndUsers[groupName];
-        for (var username in listOfUsernamesAndAges) {
-            var age = listOfUsernamesAndAges[username];
-            console.log("----> " + username + " (" + age + ")");
-        }
-    }
     menu.question('Press any key to continue...', processInput1);
 
     function processInput1() {

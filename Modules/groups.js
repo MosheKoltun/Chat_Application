@@ -1,32 +1,44 @@
 const Group = require('./group.js');
 //========================================================
 // Array of 'Group' Objects
-var groupObjectList = [];
+var listOfAllGroupObjects = [];
 //========================================================
 module.exports = {
+    getGroupObjectList:getGroupObjectList,
     createNewGroup:createNewGroup,
     getListOfGroupNames:getListOfGroupNames,
     doesGroupExist:doesGroupExist,
     removeGroup:removeGroup,
-    addUserToGroup:addUserToGroup,
-    removeUserFromGroup,removeUserFromGroup,
-    getGroupObjectList,getGroupObjectList,
 };
+//=========================================================
+function getGroupObjectList() {
+    return listOfAllGroupObjects;
+}
 //========================================================
-function createNewGroup(GroupName) {
-    var newGroup = new Group(GroupName);
-    groupObjectList.push(newGroup);
+function createNewGroup(groupName) {
+    if (groupName==="") {
+        return null;
+    }
+
+    // check that group name is unique
+    var groupObject = doesGroupExist(groupName);
+    if (groupObject !== null) {
+        return null;
+    }
+
+    var newGroup = new Group(groupName);
+    listOfAllGroupObjects.push(newGroup);
     return newGroup;
 }
 //========================================================
-function doesGroupExist(GroupName) {
-    if (groupObjectList.length === 0) {
+function doesGroupExist(groupName) {
+    if (listOfAllGroupObjects.length === 0) {
         return null;
-        // in case 'groupObjectList' is empty
+        // in case 'listOfAllGroupObjects' is empty
     }
-    for (var i = 0; i < groupObjectList.length; i++) {
-        if (groupObjectList[i].getName() === GroupName) {
-            return groupObjectList[i]; //
+    for (var i = 0; i < listOfAllGroupObjects.length; i++) {
+        if (listOfAllGroupObjects[i].getName() === groupName) {
+            return listOfAllGroupObjects[i]; //
             // If user exist. Return from function immediately
         }
     }
@@ -36,46 +48,21 @@ function doesGroupExist(GroupName) {
 //=========================================================
 function getListOfGroupNames() {
     var groupsList = [];
-    if (groupObjectList.length > 0) {
-        for (var i = 0; i < groupObjectList.length; i++) {
-            groupsList.push(groupObjectList[i].getName());
+    if (listOfAllGroupObjects.length > 0) {
+        for (var i = 0; i < listOfAllGroupObjects.length; i++) {
+            groupsList.push(listOfAllGroupObjects[i].getName());
         }
     }
     return groupsList;
 }
 //=========================================================
 function removeGroup(groupName) {
-    for(var i=0; i<groupObjectList.length; i++) {
-        if (groupObjectList[i].getName() === groupName){
-            groupObjectList.splice(i,1);
+    for(var i=0; i<listOfAllGroupObjects.length; i++) {
+        if (listOfAllGroupObjects[i].getName() === groupName){
+            listOfAllGroupObjects.splice(i,1);
             // Delete an array member
             return true;
         }
     }
     return false;
-}
-//=========================================================
-function addUserToGroup(groupName, userObject) {
-    for (var i=0; i<groupObjectList.length; i++) {
-        if (groupObjectList[i].getName() === groupName) {
-            groupObjectList[i].addUser(userObject);
-            return true;
-        }
-    }
-    return false;
-}
-//=========================================================
-function removeUserFromGroup(groupName, userObject) {
-    for (var i = 0; i < groupObjectList.length; i++) {
-        if (groupObjectList[i].getName() === groupName) {
-            var username = userObject.getName();
-            groupObjectList[i].removeUser(username);
-            return true;
-        }
-    }
-    return false;
-}
-//=========================================================
-function getGroupObjectList() {
-    return groupObjectList;
 }
