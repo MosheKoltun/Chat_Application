@@ -39,11 +39,6 @@ try {
     chatFuncs.addGroupToGroup("General", "group1");
     chatFuncs.addGroupToGroup("General", "group2");
 
-    console.log("\n#======================================================");
-    console.log("# PRINTING TREE:");
-    console.log("#======================================================");
-    chatFuncs.printTree();
-
     groupFuncs.createNewGroup("group3");
     groupFuncs.createNewGroup("group4");
     groupFuncs.createNewGroup("group5");
@@ -53,6 +48,11 @@ try {
     groupFuncs.createNewGroup("group10");
 
     console.log("group5 exists= " + groupFuncs.doesGroupExist("group5"));
+
+    console.log("\n#======================================================");
+    console.log("# PRINTING TREE:");
+    console.log("#======================================================");
+    chatFuncs.printTree();
 
     console.log("\n#======================================================");
     console.log("# After removing one group:");
@@ -82,11 +82,8 @@ try {
     console.log("# After adding groups to groups:");
     console.log("#======================================================");
     chatFuncs.addGroupToGroup("General", "group1");
-    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     chatFuncs.addGroupToGroup("General", "group2");
-    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     chatFuncs.addGroupToGroup("group7", "group3");
-    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     chatFuncs.addGroupToGroup("group8", "group4");
 
     console.log("\n#======================================================");
@@ -98,30 +95,20 @@ try {
     console.log("# After removing groups from groups:");
     console.log("#======================================================");
     chatFuncs.removeGroupFromGroup("General", "group1");
-    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     chatFuncs.removeGroupFromGroup("General", "group2");
-    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     chatFuncs.removeGroupFromGroup("group7", "group3");
-    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     chatFuncs.removeGroupFromGroup("group8", "group4");
 
     console.log("\n#======================================================");
     console.log("# After adding again groups to groups:");
     console.log("#======================================================");
     chatFuncs.addGroupToGroup("General", "group1");
-    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     chatFuncs.addGroupToGroup("General", "group2");
-    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     chatFuncs.addGroupToGroup("group7", "group3");
-    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     chatFuncs.addGroupToGroup("group8", "group4");
-    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     chatFuncs.addGroupToGroup("General", "group7");
-    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     chatFuncs.addGroupToGroup("group7", "group3");
-    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     chatFuncs.addGroupToGroup("group7", "group9");
-    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     chatFuncs.addGroupToGroup("group9", "group10");
 
     console.log("\n#======================================================");
@@ -166,6 +153,10 @@ try {
 
     chatFuncs.addGroupToGroup("group10", "group1");
 
+    console.log("\n#======================================================");
+    console.log("# PRINTING TREE:");
+    console.log("#======================================================");
+    chatFuncs.printTree();
 
     console.log("\n#======================================================");
     console.log("# Verifying that groups cannot point each other!" );
@@ -173,24 +164,27 @@ try {
     console.log("#======================================================");
 
     chatFuncs.addGroupToGroup("group10", "group7");
+    console.log("\n Please verify that group7 was not added to group10 !");
 
     console.log("\n#======================================================");
     console.log("# PRINTING TREE:");
     console.log("#======================================================");
     chatFuncs.printTree();
 
-
     console.log("\n#======================================================");
-    console.log("# PRINTING TREE:");
+    console.log("# Search group1 in group results (it appears under two groups):");
     console.log("#======================================================");
-    chatFuncs.printTree();
+
+    var arrayOfPath = chatFuncs.searchGroupInGroupHierarchy("group1");
+    console.log("Path of 'group1'= " + arrayOfPath);
 
     console.log("\n======================================================");
     console.log('PASS!');
 }
 catch (err) {
     console.log("\n======================================================");
-    console.log('FAIL!\n\nError: ' + err.message);
+    console.log('FAIL!\n');
+    console.log(err);
 }
 
 

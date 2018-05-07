@@ -1,12 +1,21 @@
 module.exports = User;
 //========================================================
-function User(username, password, age) {
+function User(userID, username, password, age) {
+    this.userID = userID;
     this.username = username;
     this.password = password;
     this.age = age;
 }
 //========================================================
-User.prototype.getName = function () {
+User.prototype.getID = function () {
+    return this.userID;
+};
+//========================================================
+User.prototype.setID = function (userID) {
+    this.userID = userID;
+};
+//========================================================
+User.prototype.getUserName = function () {
     return this.username;
 };
 //========================================================

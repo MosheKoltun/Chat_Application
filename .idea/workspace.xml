@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2764cd33-e3a9-4b96-85be-2f04521caa02" name="Default" comment="" />
+    <list default="true" id="2764cd33-e3a9-4b96-85be-2f04521caa02" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modules/chat.js" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/chat.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modules/group.js" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/group.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modules/groups.js" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/groups.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modules/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modules/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/users.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/test.js" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -17,17 +25,8 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Controlers/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3605">
-              <caret line="137" column="29" lean-forward="true" selection-start-line="137" selection-start-column="29" selection-end-line="137" selection-end-column="29" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="lib.dom.d.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="3005" column="4" selection-start-line="3005" selection-start-column="4" selection-end-line="3005" selection-end-column="4" />
+            <state relative-caret-position="5559">
+              <caret line="327" column="47" lean-forward="true" selection-start-line="327" selection-start-column="47" selection-end-line="327" selection-end-column="47" />
             </state>
           </provider>
         </entry>
@@ -35,22 +34,17 @@
       <file leaf-file-name="chat.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Modules/chat.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="12" lean-forward="true" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
+            <state relative-caret-position="1411">
+              <caret line="266" column="19" selection-start-line="266" selection-start-column="12" selection-end-line="266" selection-end-column="19" />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="99" pinned="false" current-in-tab="false">
-        <entry file="mock://vm:99">
-          <provider selected="true" editor-type-id="vmFileEditor" />
         </entry>
       </file>
       <file leaf-file-name="groups.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Modules/groups.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="71" column="35" selection-start-line="71" selection-start-column="35" selection-end-line="71" selection-end-column="35" />
+            <state relative-caret-position="1010">
+              <caret line="94" column="46" selection-start-line="94" selection-start-column="46" selection-end-line="94" selection-end-column="46" />
             </state>
           </provider>
         </entry>
@@ -58,8 +52,8 @@
       <file leaf-file-name="group.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Modules/group.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="24" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="24" />
+            <state relative-caret-position="135">
+              <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
             </state>
           </provider>
         </entry>
@@ -67,8 +61,8 @@
       <file leaf-file-name="users.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Modules/users.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="77" column="9" selection-start-line="77" selection-start-column="9" selection-end-line="77" selection-end-column="9" />
+            <state>
+              <caret column="4" selection-start-column="4" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -76,8 +70,17 @@
       <file leaf-file-name="user.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Modules/user.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret selection-end-line="1" selection-end-column="58" />
+            <state relative-caret-position="289">
+              <caret line="17" selection-start-line="17" selection-end-line="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Tests/test.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2023">
+              <caret line="119" column="42" selection-start-line="119" selection-start-column="42" selection-end-line="119" selection-end-column="42" />
             </state>
           </provider>
         </entry>
@@ -93,7 +96,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>isUsernameUnique</find>
       <find>isu</find>
       <find>isus</find>
       <find>remove</find>
@@ -102,8 +104,7 @@
       <find>createnew</find>
       <find>setUserID</find>
       <find>doesUserExist</find>
-      <find>res = userFuncs.setUserA</find>
-      <find>res = userFuncs</find>
+      <find />
       <find>doesUserExistdoesUserExist</find>
       <find>doesu</find>
       <find>printListOfGroupNames</find>
@@ -111,18 +112,20 @@
       <find>doesuse</find>
       <find>print</find>
       <find>in</find>
-      <find>chat men</find>
       <find>alrea</find>
       <find>groupObjectList</find>
       <find>getGroupObjectList</find>
       <find>getUsers</find>
-      <find>User was successfully added to the group!</find>
       <find>printGroupsUsersDisplayTree</find>
       <find>get</find>
-      <find>console</find>
       <find>groupsUsersDisplayTree</find>
       <find>getusers</find>
       <find>console.log</find>
+      <find>getName</find>
+      <find>group1</find>
+      <find>console</find>
+      <find>conso</find>
+      <find>consol</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -148,7 +151,6 @@
         <option value="$PROJECT_DIR$/user.js" />
         <option value="$PROJECT_DIR$/menu.js" />
         <option value="$PROJECT_DIR$/index.js" />
-        <option value="$PROJECT_DIR$/Modules/user.js" />
         <option value="$PROJECT_DIR$/Controlers/helperFunctions.js" />
         <option value="$PROJECT_DIR$/Controlers/userMenuHelperFunctions.js" />
         <option value="$PROJECT_DIR$/Controlers/userMenuHelperFuncs.js" />
@@ -156,11 +158,13 @@
         <option value="$PROJECT_DIR$/Views/menu.js" />
         <option value="$PROJECT_DIR$/Controlers/usersMenuHelperFuncs.js" />
         <option value="$PROJECT_DIR$/Controlers/groupsMenuHelperFuncs.js" />
+        <option value="$PROJECT_DIR$/Controlers/index.js" />
+        <option value="$PROJECT_DIR$/Modules/user.js" />
         <option value="$PROJECT_DIR$/Modules/users.js" />
         <option value="$PROJECT_DIR$/Modules/group.js" />
         <option value="$PROJECT_DIR$/Modules/groups.js" />
-        <option value="$PROJECT_DIR$/Controlers/index.js" />
         <option value="$PROJECT_DIR$/Modules/chat.js" />
+        <option value="$PROJECT_DIR$/Tests/test.js" />
       </list>
     </option>
   </component>
@@ -178,11 +182,13 @@
     <option name="width" value="1653" />
     <option name="height" value="1548" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -190,21 +196,10 @@
               <item name="Chat" type="b2602c69:ProjectViewProjectNode" />
               <item name="Chat" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="Chat" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Chat" type="462c0819:PsiDirectoryNode" />
-              <item name="Controlers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Chat" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Chat" type="462c0819:PsiDirectoryNode" />
-              <item name="Modules" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -238,26 +233,26 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Node.js.index.js">
+  <component name="RunManager" selected="Node.js.test.js">
     <configuration name="chat.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="chat.js" working-dir="$PROJECT_DIR$/Modules" />
     <configuration name="groups.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="groups.js" working-dir="$PROJECT_DIR$/Modules" />
     <configuration name="index.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="index.js" working-dir="$PROJECT_DIR$/Controlers" />
-    <configuration name="menu.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/menu.js" working-dir="$PROJECT_DIR$" />
-    <configuration name="users.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/Modules/users.js" working-dir="$PROJECT_DIR$" />
+    <configuration name="test.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="test.js" working-dir="$PROJECT_DIR$/Tests" />
+    <configuration name="user.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="user.js" working-dir="$PROJECT_DIR$/Modules" />
     <list>
-      <item itemvalue="Node.js.menu.js" />
-      <item itemvalue="Node.js.users.js" />
       <item itemvalue="Node.js.index.js" />
       <item itemvalue="Node.js.groups.js" />
       <item itemvalue="Node.js.chat.js" />
+      <item itemvalue="Node.js.user.js" />
+      <item itemvalue="Node.js.test.js" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Node.js.index.js" />
+        <item itemvalue="Node.js.test.js" />
         <item itemvalue="Node.js.chat.js" />
+        <item itemvalue="Node.js.user.js" />
+        <item itemvalue="Node.js.index.js" />
         <item itemvalue="Node.js.groups.js" />
-        <item itemvalue="Node.js.menu.js" />
-        <item itemvalue="Node.js.users.js" />
       </list>
     </recent_temporary>
   </component>
@@ -278,11 +273,12 @@
       <workItem from="1525000992159" duration="1754000" />
       <workItem from="1525007681866" duration="48756000" />
       <workItem from="1525157263066" duration="16191000" />
+      <workItem from="1525674396695" duration="21824000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="110198000" />
+    <option name="totallyTimeSpent" value="132509000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -295,24 +291,25 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.19872814" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.0" />
       <window_info anchor="bottom" id="TODO" order="10" weight="0.3291592" />
       <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Find" order="5" weight="0.3298969" />
       <window_info anchor="bottom" id="Version Control" order="3" weight="0.3291592" />
-      <window_info anchor="bottom" id="Run" order="6" weight="0.13774598" />
+      <window_info anchor="bottom" id="Run" order="6" weight="0.63717604" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="1" weight="0.3291592" />
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="7" weight="0.32646048" />
+      <window_info anchor="bottom" id="Debug" order="7" weight="0.37265417" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="4" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="5" weight="0.3298969" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -323,6 +320,14 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/Modules/chat.js</url>
+          <line>257</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+      </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
@@ -331,10 +336,31 @@
           <properties />
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="18" />
+      <option name="time" value="29" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Modules/users.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="166">
+          <caret line="18" column="1" lean-forward="true" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Modules/group.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-34">
+          <caret line="22" column="2" lean-forward="true" selection-start-line="22" selection-start-column="2" selection-end-line="22" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Modules/chat.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="35" column="30" selection-start-line="35" selection-start-column="30" selection-end-line="35" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Controlers/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="6409">
@@ -470,45 +496,52 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Modules/groups.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="71" column="35" selection-start-line="71" selection-start-column="35" selection-end-line="71" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Modules/group.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="24" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="24" />
+        <state relative-caret-position="135">
+          <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Modules/users.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="77" column="9" selection-start-line="77" selection-start-column="9" selection-end-line="77" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Modules/user.js">
-      <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret selection-end-line="1" selection-end-column="58" />
+          <caret column="4" selection-start-column="4" selection-end-column="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Controlers/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3605">
-          <caret line="137" column="29" lean-forward="true" selection-start-line="137" selection-start-column="29" selection-end-line="137" selection-end-column="29" />
+        <state relative-caret-position="5559">
+          <caret line="327" column="47" lean-forward="true" selection-start-line="327" selection-start-column="47" selection-end-line="327" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Modules/user.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tests/test.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2023">
+          <caret line="119" column="42" selection-start-line="119" selection-start-column="42" selection-end-line="119" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Modules/groups.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1010">
+          <caret line="94" column="46" selection-start-line="94" selection-start-column="46" selection-end-line="94" selection-end-column="46" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Modules/chat.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="12" lean-forward="true" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
+        <state relative-caret-position="1411">
+          <caret line="266" column="19" selection-start-line="266" selection-start-column="12" selection-end-line="266" selection-end-column="19" />
         </state>
       </provider>
     </entry>

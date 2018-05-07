@@ -1,18 +1,46 @@
 module.exports = Group;
 //========================================================
-function Group(name, users, groups) {
+function Group(groupID, name, users, groups) {
+    this.groupID = groupID;
     this.name = name;
     this.users = users || [];
     this.groups = groups || [];
 }
+
+//Getters and setters
+
 //========================================================
-Group.prototype.getName = function () {
+Group.prototype.getID = function () {
+    return this.groupID;
+};
+//========================================================
+Group.prototype.getGroupName = function () {
     return this.name;
 };
 //========================================================
 Group.prototype.getUsers = function () {
     return this.users;
 };
+//========================================================
+Group.prototype.getGroups = function () {
+    return this.groups;
+};
+//========================================================
+Group.prototype.setID = function (groupID) {
+    this.groupID = groupID;
+};
+//========================================================
+Group.prototype.setGroups = function (groups) {
+    this.groups = groups;
+};
+//========================================================
+Group.prototype.setUsers = function (users) {
+    this.users = users;
+};
+
+
+// Add/Remove functionality
+
 //========================================================
 Group.prototype.addUser = function (userInstance) {
     // This ensures all 'Group' instances contain either user or group children
@@ -26,14 +54,10 @@ Group.prototype.addUser = function (userInstance) {
 Group.prototype.removeUser = function (username) {
     for (var i = 0; i < this.users.length; i++) {
         var userInstance = this.users[i];
-        if (userInstance.getName() === username) {
+        if (userInstance.getUserName() === username) {
             this.users.splice(i, 1);
         }
     }
-};
-//========================================================
-Group.prototype.getGroups = function () {
-    return this.groups;
 };
 //========================================================
 Group.prototype.addGroup = function (groupInstance) {
@@ -48,7 +72,7 @@ Group.prototype.addGroup = function (groupInstance) {
 Group.prototype.removeGroup = function (GroupName) {
     for (var i = 0; i < this.groups.length; i++) {
         var groupInstance = this.groups[i];
-        if (groupInstance.getName() === GroupName) {
+        if (groupInstance.getGroupName() === GroupName) {
             this.groups.splice(i, 1);
         }
     }

@@ -4,22 +4,46 @@ const groupFuncs = require('./groups.js');
 // Tree Head
 const head = groupFuncs.createNewGroup("General");
 
+//a 'virtual' group is created if you want to add a groups with a name that already exists in the tree
+// it will create a new group and then copy all the properties from the 'original' group
+var virtualGroupsDictionary = {};
+
 //=========================================================
 module.exports = {
     addUserToGroup:addUserToGroup,
     removeUserFromGroup:removeUserFromGroup,
     addGroupToGroup:addGroupToGroup,
     removeGroupFromGroup:removeGroupFromGroup,
+    searchUserInGroupHierarchy:searchUserInGroupHierarchy,
     searchGroupInGroupHierarchy:searchGroupInGroupHierarchy,
     printTree:printTree,
 };
+//=========================================================
+// createVirtualGroup
+//=========================================================
+function createVirtualGroup(originalGroupObject) {
+    //create virtual group
+    var originalGroupName = originalGroupObject.getGroupName();
+    var virtualGroupObject = groupFuncs.createNewGroup(originalGroupName);
+
+    //copy all properties from original group to virtual group
+    virtualGroupObject.setGroups(originalGroupObject.getGroups());
+    virtualGroupObject.setUsers(originalGroupObject.getUsers());
+
+    //add to virtualGroupsDictionary
+    var VirtualGroupID = virtualGroupObject.getID();
+    var virtualGroupName = virtualGroupObject.getGroupName();
+    virtualGroupsDictionary[VirtualGroupID] = virtualGroupName;
+
+    return virtualGroupObject;
+}
 //=========================================================
 // addUserToGroup
 //=========================================================
 function addUserToGroup(groupName, username){
 
     //Don't allow adding users to head (only allow adding groups to head)
-    if (groupName === head.getName()) {
+    if (groupName === head.getGroupName()) {
         return false;
     }
 
@@ -40,14 +64,13 @@ function addUserToGroup(groupName, username){
     // Check that user is not already a child of that group
     var listOfUsersInGroup = groupObject.getUsers();
     for (var i=0; i < listOfUsersInGroup.length; i++) {
-        if (listOfUsersInGroup[i].getName() === username) {
+        if (listOfUsersInGroup[i].getUserName() === username) {
             return false;
         }
     }
 
     //Add user
     var res = groupObject.addUser(userObject);
-    console.log(res + "==> Parent: " + groupObject.getName() + " added child:" + userObject.getName());
     return res;
 }
 //=========================================================
@@ -67,11 +90,9 @@ function removeUserFromGroup(groupName, username){
 
     //remove user
     var childrenOfParentGroupObject = groupObject.getUsers();
-    console.log("length= " + childrenOfParentGroupObject.length)
     for (var i = 0; i < childrenOfParentGroupObject.length; i++) {
-        if (childrenOfParentGroupObject[i].getName() === username) {
+        if (childrenOfParentGroupObject[i].getUserName() === username) {
             groupObject.removeUser(username);
-            console.log("parent= " + groupName + " child= " + username);
             return true;
         }
     }
@@ -80,10 +101,10 @@ function removeUserFromGroup(groupName, username){
 //=========================================================
 // addGroupToGroup
 //=========================================================
-function addGroupToGroup(parentGroupName, childGroupName){
+function addGroupToGroup(parentGroupName, childGroupName) {
 
     // Never allow making the head node a child of another group
-    if (childGroupName === head.getName()) {
+    if (childGroupName === head.getGroupName()) {
         return false;
     }
 
@@ -104,8 +125,8 @@ function addGroupToGroup(parentGroupName, childGroupName){
     // Check that child group is not already an immediate child of that parent group
     // because if it is there is no point to try to add it again
     var listOfGroupsInGroup = parentGroupObject.getGroups();
-    for (var i=0; i < listOfGroupsInGroup.length; i++) {
-        if (listOfGroupsInGroup[i].getName() === childGroupName) {
+    for (var i = 0; i < listOfGroupsInGroup.length; i++) {
+        if (listOfGroupsInGroup[i].getGroupName() === childGroupName) {
             return false;
         }
     }
@@ -117,9 +138,15 @@ function addGroupToGroup(parentGroupName, childGroupName){
         return false;
     }
 
+    // Handle case when you want to add groups with a name that already exists in the tree
+    res = searchGroupInGroupHierarchy(childGroupName);
+    if (res.length !== 0) {
+        // Override reference
+        childGroupObject = createVirtualGroup(childGroupObject);
+    }
+
     //Add group
-    var res = parentGroupObject.addGroup(childGroupObject);
-    console.log(res + "==> Parent: " + parentGroupObject.getName() + " added child:" + childGroupObject.getName());
+    res = parentGroupObject.addGroup(childGroupObject);
     return res;
 }
 //=========================================================
@@ -139,11 +166,9 @@ function removeGroupFromGroup(parentGroupName, childGroupName){
 
     //remove group
     var childrenOfParentGroupObject = parentGroupObject.getGroups();
-    console.log("length= " + childrenOfParentGroupObject.length)
     for (var i = 0; i < childrenOfParentGroupObject.length; i++) {
-        if (childrenOfParentGroupObject[i].getName() === childGroupName) {
+        if (childrenOfParentGroupObject[i].getGroupName() === childGroupName) {
             parentGroupObject.removeGroup(childGroupName);
-            console.log("parent= " + parentGroupName + " child= " + childGroupName);
             return true;
         }
     }
@@ -175,9 +200,9 @@ function areGroupsPointingEachOther(parentGroupName, childGroupName) {
 //=========================================================
 function searchGroupInGroupHierarchy(childGroupName) {
     var arrayOfPath = [];
-    arrayOfPath = searchGroupInGroupHierarchyRecursion (head, childGroupName, arrayOfPath);
+    arrayOfPath = searchGroupInGroupHierarchyRecursion(head, childGroupName, arrayOfPath);
     if (arrayOfPath.length !== 0) {
-        arrayOfPath.push(head.getName());
+        arrayOfPath.push(head.getGroupName());
     }
     return arrayOfPath;
 }
@@ -185,11 +210,11 @@ function searchGroupInGroupHierarchy(childGroupName) {
 
 function searchGroupInGroupHierarchyRecursion(parentObject, childGroupName, arrayOfPath){
     var firstLevelChildrenOfParentGroup = parentObject.getGroups();
-    for (var i = 0; i < firstLevelChildrenOfParentGroup.length; i++) {
+    for (var i=0 ; i < firstLevelChildrenOfParentGroup.length; i++) {
         var groupObject = firstLevelChildrenOfParentGroup[i];
-        if (groupObject.getName() === childGroupName) {
+        if (groupObject.getGroupName() === childGroupName) {
             arrayOfPath.push(childGroupName);
-            return arrayOfPath;
+            break;
         } else {
             var childGroups = groupObject.getGroups();
             if (childGroups.length !== 0) {
@@ -197,7 +222,7 @@ function searchGroupInGroupHierarchyRecursion(parentObject, childGroupName, arra
                 if (arrayOfPath.length === 0) {
                     break;
                 }
-                arrayOfPath.push(groupObject.getName());
+                arrayOfPath.push(groupObject.getGroupName());
             }
         }
     }
@@ -209,29 +234,37 @@ function searchGroupInGroupHierarchyRecursion(parentObject, childGroupName, arra
 function printTree() {
     var str = "";
     var headNumOfChildren = head.getGroups().length;
-    console.log("|---->\\(" + head.getName() + ")="+headNumOfChildren);
-    var res = printTreeRecursion (head, str);
-    return res;
+    console.log("|---->\\" + head.getGroupName() + "(GID " + head.getID() + ") "+headNumOfChildren);
+    printTreeRecursion (head, str);
 }
 //---------------------------------------------------------
 
 function printTreeRecursion(parentObject, str) {
     str+="      ";
     var firstLevelChildrenOfParentGroup = parentObject.getGroups();
+
+    //print groups
     for (var i = 0; i < firstLevelChildrenOfParentGroup.length; i++) {
         var child = firstLevelChildrenOfParentGroup[i];
+
+        //if we reached leafs
         var usersArray = child.getUsers();
         if (usersArray.length !== 0) {
-            console.log(str + "|---->\\(" + child.getName() + ")="+usersArray.length)
-            for (var user of usersArray) {
-                console.log(str + "|     |---->(" + user.getName() + ")");
+            console.log(str + "|---->\\" + child.getGroupName() + "(GID " + child.getID() + ") "+usersArray.length);
+
+            //print users
+            for (var j=0; j<usersArray.length; j++) {
+                var aUser = usersArray[j];
+                console.log(str + "|     |---->" + aUser.getUserName() + "(UID " + aUser.getID() + ")");
             }
             console.log(str + "|");
+
+        // if we havn't reached leafs yet
         } else {
             var groupObject = child;
-            var groupName = groupObject.getName();
+            var groupName = groupObject.getGroupName();
             var groupNumOfChildren = groupObject.getGroups().length;
-            console.log(str + "|---->\\(" + groupName + ")="+groupNumOfChildren);
+            console.log(str + "|---->\\" + groupName + "(GID " + child.getID() + ") "+groupNumOfChildren);
             printTreeRecursion(child, str);
         }
     }
