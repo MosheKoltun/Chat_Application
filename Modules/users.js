@@ -5,13 +5,28 @@ var userObjectList = [];
 var IDsAndUsersDictionary = {};
 //========================================================
 module.exports = {
-    createNewUser:createNewUser,
-    getListOfUserNames:getListOfUserNames,
     doesUserExist:doesUserExist,
+    getListOfAllUserObjects:getListOfAllUserObjects,
+    getUserObjectAccordingToID:getUserObjectAccordingToID,
+    createNewUser:createNewUser,
     removeUser:removeUser,
     updateUsername:updateUsername,
     updateUserAge:updateUserAge,
 };
+//=========================================================
+function getListOfAllUserObjects() {
+    return userObjectList;
+}
+//=========================================================
+function doesUserExist(username) {
+    for(var i=0; i<userObjectList.length; i++) {
+        var userObject = userObjectList[i];
+        if (userObject.getUserName() === username) {
+            return userObject;
+        }
+    }
+    return null;
+}
 //=========================================================
 function generateUserID() {
     for (var ID=0; ID < Number.MAX_VALUE; ID++)
@@ -21,44 +36,30 @@ function generateUserID() {
     // new ID numbers are not available(reached the maximum of the ES5 'Number')
     return -1;
 }
+//=========================================================
+function getUserObjectAccordingToID(userID) {
+    if (!IDsAndUsersDictionary[userID]) {
+        return null;
+    }
+    // if ID exist
+    var userObject =  IDsAndUsersDictionary[userID];
+    return userObject;
+}
 //========================================================
 function createNewUser(username, password, age) {
+    // generate new ID
     var userID = generateUserID();
+    // if reached maximum of ES5 'Number'
     if (userID === -1) {
         return false;
     }
-
+    // create new user
     var newUser = new User(userID, username, password, age);
-
+    // update lists
     userObjectList.push(newUser);
     IDsAndUsersDictionary[userID] = newUser;
 
     return newUser;
-}
-//========================================================
-function doesUserExist(username) {
-    if (userObjectList.length === 0) {
-        return null;
-        // in case 'userObjectList' is empty
-    }
-    for (var i = 0; i < userObjectList.length; i++) {
-        if (userObjectList[i].getUserName() === username) {
-            return userObjectList[i]; //
-            // If user exist. Return from function immediately
-        }
-    }
-    return null;
-    // If user does not exist
-}
-//=========================================================
-function getListOfUserNames() {
-    var usernameList = [];
-    if (userObjectList.length > 0) {
-        for (var i = 0; i < userObjectList.length; i++) {
-            usernameList.push(userObjectList[i].getUserName());
-        }
-    }
-    return usernameList;
 }
 //=========================================================
 function removeUser(username) {
@@ -66,11 +67,9 @@ function removeUser(username) {
         var userObject = userObjectList[i];
         if (userObject.getUserName() === username){
             // Disconnect userObjectList from all its variables
-            // so garbage collector could handle it
-
+                // so that garbage collector could handle it
             // Delete an array member
             userObjectList.splice(i,1);
-
             // remove from ID list
             delete IDsAndUsersDictionary[userObject.getID()];
             return true;

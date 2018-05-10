@@ -1,6 +1,4 @@
-const userFuncs = require('../Modules/users.js');
-const groupFuncs = require('../Modules/groups.js');
-const chatFuncs = require('../Modules/chat.js');
+const treeFuncs = require('../Modules/tree.js');
 
 const readline = require('readline');
 //===========================================================================
@@ -50,8 +48,8 @@ function showUserMenu() {
     );
     menu.question('Where to go? ', function(input) {
         switch(input) {
-            case '1': createNewUser(); break;
-            case '2': removeUser(); break;
+            case '1': createNewUserWithQuestion(); break;
+            case '2': removeUserWithQuestion(); break;
             case '3': showUpdateUserProfileMenu(); break;
             case '4': printListOfUserNames(); break;
             case '5': showMainMenu(); break;
@@ -73,8 +71,8 @@ function showUpdateUserProfileMenu() {
     );
     menu.question('Where to go? ', function(input) {
         switch(input) {
-            case '1': updateUsername(); break;
-            case '2': updateUserAge(); break;
+            case '1': updateUsernameWithQuestion(); break;
+            case '2': updateUserAgeWithQuestion(); break;
             case '3': showUserMenu(); break;
             default:  showUpdateUserProfileMenu() /* show menu again if input does not match */;
         }
@@ -96,8 +94,8 @@ function showGroupsMenu() {
     );
     menu.question('Where to go? ', function(input) {
         switch(input) {
-            case '1' : createNewGroup(); break;
-            case '2' : removeGroup(); break;
+            case '1' : createNewGroupWithQuestion(); break;
+            case '2' : removeGroupWithQuestion(); break;
             case '3' : printListOfGroupNames(); break;
             case '4': showMainMenu(); break;
             default: showGroupsMenu() /* show menu again if input does not match */;
@@ -121,10 +119,10 @@ function showChatMenu() {
     );
     menu.question('Where to go? ', function(input) {
         switch(input) {
-            case '1': addUserToGroup(); break;
-            case '2': removeUserFromGroup(); break;
-            case '3': addGroupToGroup(); break;
-            case '4': removeGroupFromGroup(); break;
+            case '1': addUserToGroupWithQuestion(); break;
+            case '2': removeUserFromGroupWithQuestion(); break;
+            case '3': addGroupToGroupWithQuestion(); break;
+            case '4': removeGroupFromGroupWithQuestion(); break;
             case '5': printGroupsUsersDisplayTree(); break;
             case '6': showMainMenu(); break;
             default: showChatMenu() /* show menu again if input does not match */;
@@ -132,35 +130,37 @@ function showChatMenu() {
     });
 }
 //===========================================================================
-// createNewUser
+// createNewUserWithQuestion
 //===========================================================================
-function createNewUser() {
+function createNewUserWithQuestion() {
     var userInput = {};
     console.clear();
+
     menu.question('Please Enter Username:\n', processInput1);
+
     function processInput1(input) {
-        var userObject = userFuncs.doesUserExist(input);
-        if (userObject!=null) {
-            // check if username is not unique
-            console.clear();
-            console.log('Error username already exists!');
-            menu.question('Please Enter Username:\n', processInput1);
+        if (input === "") {
+            menu.question('Error: Field is empty!\n' +
+                'Please enter username again:\n', processInput1);
+        }
+    var res = treeFuncs.doesUserExist(input);
+        if (res !== null) {
+            menu.question('Error: Username already exist!\n' +
+                'Please enter username again:\n', processInput1);
         } else {
-            if (input === "") {
-                menu.question('Field is empty. Please enter username again:\n', processInput1);
-            } else {
-                userInput.username = input;
-                menu.question('Please Enter Password:\n', processInput2);
-            }
+            userInput.username = input;
+            menu.question('Please Enter Password:\n', processInput2);
         }
     }
+
     function processInput2(input) {
         userInput.password=input;
         menu.question('Please Enter Age:\n', processInput3);
     }
+
     function processInput3(input) {
         userInput.age=input;
-        userFuncs.createNewUser(userInput.username, userInput.password, userInput.age);
+        treeFuncs.createNewUser(userInput.username, userInput.password, userInput.age);
         showUserMenu();
     }
 }
@@ -169,11 +169,14 @@ function createNewUser() {
 //===========================================================================
 function printListOfUserNames() {
     console.clear();
-    var listOfUsernames = userFuncs.getListOfUserNames();
-    for(var i=0; i<listOfUsernames.length; i++) {
-        console.log(listOfUsernames[i]);
+    var listOfAllUserObjects = treeFuncs.getListOfAllUserObjects();
+    for(var i=0; i<listOfAllUserObjects.length; i++) {
+        var username = listOfAllUserObjects.getUserName();
+        var userID = listOfAllUserObjects.getID();
+        console.log(userID + " : " + username);
     }
     menu.question('Press any key to continue...', processInput1);
+
     function processInput1() {
         showUserMenu();
     }
@@ -181,11 +184,12 @@ function printListOfUserNames() {
 //===========================================================================
 // removeUserWithQuestion
 //===========================================================================
-function removeUser() {
+function removeUserWithQuestion() {
     console.clear();
     menu.question('Please enter username to be removed:\n', processInput1);
+
     function processInput1(input) {
-        var res = userFuncs.removeUser(input);
+        var res = treeFuncs.removeUser(input);
         if (res){
             console.log('Username was successfully removed!');
         } else {
@@ -193,21 +197,22 @@ function removeUser() {
         }
         menu.question('Press any key to continue...', processInput2);
     }
+
     function processInput2() {
         showUserMenu();
     }
 }
 //===========================================================================
-// updateUsername
+// updateUsernameWithQuestion
 //===========================================================================
-function updateUsername() {
+function updateUsernameWithQuestion() {
     console.clear();
     menu.question('Please enter old username:\n', processInput1);
     var oldUsername = null;
 
     function processInput1(input) {
         oldUsername = input;
-        var userObject = userFuncs.doesUserExist(input);
+        var userObject = treeFuncs.doesUserExist(input);
         if (userObject!=null) {
             menu.question('Please enter new username:\n', processInput2);
         } else {
@@ -215,26 +220,29 @@ function updateUsername() {
             menu.question('Press any key to continue...', processInput3);
         }
     }
+
     function processInput2(input) {
         var newUsername = input;
-        userFuncs.updateUsername(oldUsername, newUsername);
+        treeFuncs.updateUsername(oldUsername, newUsername);
         console.log('Username was successfully changed!');
         menu.question('Press any key to continue...', processInput3);
     }
+
     function processInput3() {
         showUpdateUserProfileMenu();
     }
 }
 //===========================================================================
-// updateUserAge
+// updateUserAgeWithQuestion
 //===========================================================================
-function updateUserAge(){
+function updateUserAgeWithQuestion(){
     console.clear();
     menu.question('Please enter username:\n', processInput1);
     var username = null;
+
     function processInput1(input) {
         username = input;
-        var userObject = userFuncs.doesUserExist(input);
+        var userObject = treeFuncs.doesUserExist(input);
         if (userObject!=null) {
             menu.question('Please enter new age:\n', processInput2);
         } else {
@@ -244,18 +252,19 @@ function updateUserAge(){
     }
     function processInput2(input) {
         var newUserAge = input;
-        userFuncs.updateUserAge(username, newUserAge);
+        treeFuncs.updateUserAge(username, newUserAge);
         console.log('User age was successfully changed!');
         menu.question('Press any key to continue...', processInput3);
     }
+
     function processInput3() {
         showUpdateUserProfileMenu();
     }
 }
 //===========================================================================
-// createNewGroup
+// createNewGroupWithQuestion
 //===========================================================================
-function createNewGroup() {
+function createNewGroupWithQuestion() {
     console.clear();
     menu.question('Please Enter Group Name:\n', processInput1);
 
@@ -264,7 +273,7 @@ function createNewGroup() {
             menu.question('Field is empty. Please enter group name again:\n', processInput1);
         } else {
             console.clear();
-            var res = groupFuncs.createNewGroup(input);
+            var res = treeFuncs.createNewGroup(input);
             if (res===null) {
                 console.log('Error Group name already exists!');
                 menu.question('Please Enter Group Name:\n', processInput1);
@@ -278,9 +287,9 @@ function createNewGroup() {
 //===========================================================================
 function printListOfGroupNames() {
     console.clear();
-    var listOfGroupNames = groupFuncs.getListOfGroupNames();
-    for(var i=0; i<listOfGroupNames.length; i++) {
-        console.log(listOfGroupNames[i]);
+    var listOfAllGroupObjects = treeFuncs.getListOfAllGroupObjects();
+    for(var i=0; i<listOfAllGroupObjects.length; i++) {
+        console.log(listOfAllGroupObjects[i].getGroupName());
     }
     menu.question('Press any key to continue...', processInput1);
 
@@ -289,43 +298,45 @@ function printListOfGroupNames() {
     }
 }
 //===========================================================================
-// removeGroup
+// removeGroupWithQuestion
 //===========================================================================
-function removeGroup() {
+function removeGroupWithQuestion() {
     console.clear();
-    menu.question('Please enter group name to be removed:\n', processInput1);
+    menu.question('Please enter group ID to be removed:\n', processInput1);
+
     function processInput1(input) {
-        var res = groupFuncs.removeGroup(input);
+        var res = treeFuncs.removeGroupFromList(input);
         if (res){
-            console.log('Group name was successfully removed!');
+            console.log('Group was successfully removed!');
         } else {
-            console.log('Group name does not exist!');
+            console.log('Group does not exist!');
         }
         menu.question('Press any key to continue...', processInput2);
     }
+
     function processInput2() {
         showGroupsMenu();
     }
 }
 //===========================================================================
-// addUserToGroup
+// addUserToGroupWithQuestion
 //===========================================================================
-function addUserToGroup() {
+function addUserToGroupWithQuestion() {
     console.clear();
-    var groupName = null;
-    var username = null;
+    var groupID = null;
+    var userID = null;
 
-    menu.question('Please enter group name:\n', processInput1);
+    menu.question('Please enter group ID:\n', processInput1);
 
     function processInput1(input) {
-        groupName = input;
-        menu.question('Please enter username:\n', processInput2);
+        groupID = input;
+        menu.question('Please enter user ID:\n', processInput2);
     }
 
     function processInput2(input) {
-        username = input;
+        userID = input;
 
-        var res = chatFuncs.addUserToGroup(groupName, username);
+        var res = treeFuncs.addUserToGroup(groupID, userID);
         if (res){
             console.log('User was successfully added to the group!');
         } else {
@@ -339,24 +350,24 @@ function addUserToGroup() {
     }
 }
 //===========================================================================
-// removeUserFromGroup
+// removeUserFromGroupWithQuestion
 //===========================================================================
-function removeUserFromGroup() {
+function removeUserFromGroupWithQuestion() {
     console.clear();
-    var groupName = null;
-    var username = null;
+    var groupID = null;
+    var userID = null;
 
-    menu.question('Please enter group name:\n', processInput1);
+    menu.question('Please enter group ID:\n', processInput1);
 
     function processInput1(input) {
-        groupName = input;
-        menu.question('Please enter username:\n', processInput2);
+        groupID = input;
+        menu.question('Please enter user ID:\n', processInput2);
     }
 
     function processInput2(input) {
-        username = input;
+        userID = input;
 
-        var res = chatFuncs.removeUserFromGroup(groupName, username);
+        var res = treeFuncs.removeUserFromGroup(groupID, userID);
         if (res){
             console.log('User was successfully removed from the group!');
         } else {
@@ -370,25 +381,25 @@ function removeUserFromGroup() {
     }
 }
 //===========================================================================
-// addGroupToGroup
+// addGroupToGroupWithQuestion
 //===========================================================================
-function addGroupToGroup() {
+function addGroupToGroupWithQuestion() {
     console.clear();
-    var parentGroupName = null;
-    var childGroupName = null;
+    var parentGroupID = null;
+    var childGroupID = null;
 
-    menu.question('Please enter parent group name:\n', processInput1);
+    menu.question('Please enter parent group ID:\n', processInput1);
 
     function processInput1(input) {
-        parentGroupName = input;
-        menu.question('Please enter child group name:\n', processInput2);
+        parentGroupID = input;
+        menu.question('Please enter child group ID:\n', processInput2);
     }
 
     function processInput2(input) {
-        childGroupName = input;
+        childGroupID = input;
 
-        var res = chatFuncs.addGroupToGroup(parentGroupName, childGroupName);
-        if (res){
+        var res = treeFuncs.addGroupToGroup(parentGroupID, childGroupID);
+        if (res !== null){
             console.log('Child group was successfully added to the parent group!');
         } else {
             console.log('Failed!');
@@ -401,25 +412,25 @@ function addGroupToGroup() {
     }
 }
 //===========================================================================
-// removeUserFromGroup
+// removeGroupFromGroupWithQuestion
 //===========================================================================
-function removeGroupFromGroup() {
+function removeGroupFromGroupWithQuestion() {
     console.clear();
-    var parentGroupName = null;
-    var childGroupName = null;
+    var parentGroupID = null;
+    var childGroupID = null;
 
     menu.question('Please enter parent group name:\n', processInput1);
 
     function processInput1(input) {
-        parentGroupName = input;
+        parentGroupID = input;
         menu.question('Please enter child group name:\n', processInput2);
     }
 
     function processInput2(input) {
-        childGroupName = input;
+        childGroupID = input;
 
-        var res = chatFuncs.removeGroupFromGroup(parentGroupName, childGroupName);
-        if (res){
+        var res = treeFuncs.removeGroupFromGroup(parentGroupID, childGroupID);
+        if (!!res){
             console.log('Child group was successfully removed from the parent group!');
         } else {
             console.log('Failed!');
@@ -432,12 +443,12 @@ function removeGroupFromGroup() {
     }
 }
 //===========================================================================
-// getListOfGroupAndUsers
+// printGroupsUsersDisplayTree
 //===========================================================================
 function printGroupsUsersDisplayTree() {
     console.clear();
 
-    chatFuncs.printTree();
+    treeFuncs.printTree();
 
     menu.question('Press any key to continue...', processInput1);
 
