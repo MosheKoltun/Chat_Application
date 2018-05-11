@@ -95,7 +95,7 @@ function showGroupsMenu() {
     menu.question('Where to go? ', function(input) {
         switch(input) {
             case '1' : createNewGroupWithQuestion(); break;
-            case '2' : removeGroupWithQuestion(); break;
+            case '2' : removeGroupNotInTreeWithQuestion(); break;
             case '3' : printListOfGroupNames(); break;
             case '4': showMainMenu(); break;
             default: showGroupsMenu() /* show menu again if input does not match */;
@@ -114,17 +114,23 @@ function showChatMenu() {
         '2 = Remove User From Group      \n' +
         '3 = Add Group To Group          \n' +
         '4 = Remove Group From Group     \n' +
-        '5 = Show List Of Group And Users\n' +
-        '6 = Go back to main               '
+        '5 = Flatten Group               \n' +
+        '6 = Print Tree of Group And Users\n' +
+        '7 = Show Group Path (Search)    \n' +
+        '8 = Show User Parents (Search)  \n' +
+        '9 = Go back to main               '
     );
     menu.question('Where to go? ', function(input) {
         switch(input) {
             case '1': addUserToGroupWithQuestion(); break;
             case '2': removeUserFromGroupWithQuestion(); break;
             case '3': addGroupToGroupWithQuestion(); break;
-            case '4': removeGroupFromGroupWithQuestion(); break;
-            case '5': printGroupsUsersDisplayTree(); break;
-            case '6': showMainMenu(); break;
+            case '4': removeGroupHierarchyWithQuestion(); break;
+            case '5': break;
+            case '6': printGroupsUsersDisplayTree(); break;
+            case '7': break;
+            case '8': break;
+            case '9': showMainMenu(); break;
             default: showChatMenu() /* show menu again if input does not match */;
         }
     });
@@ -161,23 +167,6 @@ function createNewUserWithQuestion() {
     function processInput3(input) {
         userInput.age=input;
         treeFuncs.createNewUser(userInput.username, userInput.password, userInput.age);
-        showUserMenu();
-    }
-}
-//===========================================================================
-// printListOfUserNames
-//===========================================================================
-function printListOfUserNames() {
-    console.clear();
-    var listOfAllUserObjects = treeFuncs.getListOfAllUserObjects();
-    for(var i=0; i<listOfAllUserObjects.length; i++) {
-        var username = listOfAllUserObjects.getUserName();
-        var userID = listOfAllUserObjects.getID();
-        console.log(userID + " : " + username);
-    }
-    menu.question('Press any key to continue...', processInput1);
-
-    function processInput1() {
         showUserMenu();
     }
 }
@@ -262,6 +251,23 @@ function updateUserAgeWithQuestion(){
     }
 }
 //===========================================================================
+// printListOfUserNames
+//===========================================================================
+function printListOfUserNames() {
+    console.clear();
+    var listOfAllUserObjects = treeFuncs.getListOfAllUserObjects();
+    for(var i=0; i<listOfAllUserObjects.length; i++) {
+        var username = listOfAllUserObjects.getUserName();
+        var userID = listOfAllUserObjects.getID();
+        console.log(userID + " : " + username);
+    }
+    menu.question('Press any key to continue...', processInput1);
+
+    function processInput1() {
+        showUserMenu();
+    }
+}
+//===========================================================================
 // createNewGroupWithQuestion
 //===========================================================================
 function createNewGroupWithQuestion() {
@@ -283,6 +289,29 @@ function createNewGroupWithQuestion() {
     }
 }
 //===========================================================================
+// removeGroupHierarchyWithQuestion
+//===========================================================================
+function removeGroupNotInTreeWithQuestion() {
+    console.clear();
+
+    menu.question('Please enter ID of group to remove:\n', processInput1);
+
+    function processInput1(groupToRemoveID) {
+
+        var res = treeFuncs.removeGroupNotInTree(groupToRemoveID);
+        if (!!res){
+            console.log('Group was successfully removed!');
+        } else {
+            console.log('Failed!');
+        }
+        menu.question('Press any key to continue...', processInput3);
+    }
+
+    function processInput3() {
+        showChatMenu();
+    }
+}
+//===========================================================================
 // printListOfGroupNames
 //===========================================================================
 function printListOfGroupNames() {
@@ -294,27 +323,6 @@ function printListOfGroupNames() {
     menu.question('Press any key to continue...', processInput1);
 
     function processInput1() {
-        showGroupsMenu();
-    }
-}
-//===========================================================================
-// removeGroupWithQuestion
-//===========================================================================
-function removeGroupWithQuestion() {
-    console.clear();
-    menu.question('Please enter group ID to be removed:\n', processInput1);
-
-    function processInput1(input) {
-        var res = treeFuncs.removeGroupFromList(input);
-        if (res){
-            console.log('Group was successfully removed!');
-        } else {
-            console.log('Group does not exist!');
-        }
-        menu.question('Press any key to continue...', processInput2);
-    }
-
-    function processInput2() {
         showGroupsMenu();
     }
 }
@@ -412,26 +420,18 @@ function addGroupToGroupWithQuestion() {
     }
 }
 //===========================================================================
-// removeGroupFromGroupWithQuestion
+// removeGroupHierarchyWithQuestion
 //===========================================================================
-function removeGroupFromGroupWithQuestion() {
+function removeGroupHierarchyWithQuestion() {
     console.clear();
-    var parentGroupID = null;
-    var childGroupID = null;
 
-    menu.question('Please enter parent group name:\n', processInput1);
+    menu.question('Please enter ID of group to remove:\n', processInput1);
 
-    function processInput1(input) {
-        parentGroupID = input;
-        menu.question('Please enter child group name:\n', processInput2);
-    }
+    function processInput1(groupToRemoveID) {
 
-    function processInput2(input) {
-        childGroupID = input;
-
-        var res = treeFuncs.removeGroupFromGroup(parentGroupID, childGroupID);
+        var res = treeFuncs.removeGroupHierarchy(groupToRemoveID);
         if (!!res){
-            console.log('Child group was successfully removed from the parent group!');
+            console.log('Group was successfully removed!');
         } else {
             console.log('Failed!');
         }

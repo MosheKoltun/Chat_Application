@@ -58,12 +58,12 @@ Group.prototype.removeUser = function (userObject) {
     return userObject;
 };
 //========================================================
-Group.prototype.addGroup = function (groupInstance) {
+Group.prototype.addGroup = function (groupObject) {
     // This ensures all 'Group' instances contain either user or group children
     if (this.users.length !== 0) {
         return false;
     }
-    this.groups.push(groupInstance);
+    this.groups.push(groupObject);
     return true;
 };
 //========================================================

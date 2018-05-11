@@ -15,11 +15,13 @@ try {
 
     console.log(JSON.stringify(groupFuncs.createNewGroup("group1")));
     console.log(JSON.stringify(groupFuncs.createNewGroup("group2")));
-    console.log(JSON.stringify(groupFuncs.createNewGroup("group3")));
+    var group3_Object = groupFuncs.createNewGroup("group3");
+    console.log(JSON.stringify(group3_Object));
     console.log(JSON.stringify(groupFuncs.createNewGroup("group4")));
     console.log(JSON.stringify(groupFuncs.createNewGroup("group5")));
     console.log(JSON.stringify(groupFuncs.createNewGroup("group6")));
-    console.log(JSON.stringify(groupFuncs.createNewGroup("group7")));
+    var group7_Object = groupFuncs.createNewGroup("group7");
+    console.log(JSON.stringify(group7_Object));
     console.log(JSON.stringify(groupFuncs.createNewGroup("group8")));
     console.log(JSON.stringify(groupFuncs.createNewGroup("group9")));
     console.log(JSON.stringify(groupFuncs.createNewGroup("group10")));
@@ -28,24 +30,25 @@ try {
     console.log(greenColor,"# After building a tree:");
     console.log(greenColor,"#======================================================");
 
-    //console.log(JSON.stringify(treeFuncs.addGroupToGroup(0, 1)));
     console.log(JSON.stringify(treeFuncs.addGroupToGroup(0, 1)));
     console.log(JSON.stringify(treeFuncs.addGroupToGroup(0, 2)));
     console.log(JSON.stringify(treeFuncs.addGroupToGroup(1, 4)));
     console.log(JSON.stringify(treeFuncs.addGroupToGroup(1, 5)));
     console.log(JSON.stringify(treeFuncs.addGroupToGroup(4, 6)));
     console.log(JSON.stringify(treeFuncs.addGroupToGroup(3, 7)));
+    console.log(JSON.stringify(treeFuncs.addGroupToGroup(8, 3)));
     console.log(JSON.stringify(treeFuncs.addGroupToGroup(0, 8)));
     console.log(JSON.stringify(treeFuncs.addGroupToGroup(0, 9)));
 
+    console.log(blueColor,"\n#======================================================");
+    console.log(blueColor,"# PRINTING TREE:");
+    console.log(blueColor,"#======================================================");
+    treeFuncs.printTree();
 
-    console.log(">>>>>>>>>>>>>>>>>>>>>");
-
-    var group3_Object = treeFuncs.addGroupToGroup(4, 3);
-    console.log(JSON.stringify(group3_Object));
-
-    var group10_Object = treeFuncs.addGroupToGroup(4, 10);
-    console.log(JSON.stringify(group10_Object));
+    console.log(greenColor,"\n#======================================================");
+    console.log(greenColor,"# After adding group1 to group2:");
+    console.log(greenColor,"#======================================================");
+    console.log(JSON.stringify(treeFuncs.addGroupToGroup(9, 1)));
 
     console.log(blueColor,"\n#======================================================");
     console.log(blueColor,"# PRINTING TREE:");
@@ -53,14 +56,19 @@ try {
     treeFuncs.printTree();
 
     console.log(magentaColor,"\n#======================================================");
-    console.log(magentaColor,"# Search group10 in group results:");
+    console.log(magentaColor,"# Search group in group results:");
     console.log(magentaColor,"#======================================================");
 
-    console.log("1st Path of 'group3'= ");
-    console.log(JSON.stringify(treeFuncs.searchGroupInGroupHierarchy(group3_Object)));
-
-    console.log("1st Path of 'group10'= ");
-    console.log(JSON.stringify(treeFuncs.searchGroupInGroupHierarchy(group10_Object)));
+    console.log("Group 3 Path:");
+    var res = treeFuncs.searchGroupInTreeReturnPath(group3_Object);
+    for (var group of res ) {
+        console.log(JSON.stringify(group));
+    }
+    console.log("\nGroup 7 Path:");
+    res = treeFuncs.searchGroupInTreeReturnPath(group7_Object);
+    for (var group of res ) {
+        console.log(JSON.stringify(group));
+    }
 
     console.log("\n======================================================");
     console.log(greenColor,'PASS!');
@@ -70,10 +78,3 @@ catch (err) {
     console.log(redColor,'FAIL!\n');
     console.log(err);
 }
-
-
-
-
-
-
-
