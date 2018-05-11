@@ -56,16 +56,24 @@ try {
     treeFuncs.printTree();
 
     console.log(magentaColor,"\n#======================================================");
+    console.log(magentaColor,"# Get list of groups");
+    console.log(magentaColor,"#======================================================");
+    var listOfGroups = (groupFuncs.getListOfAllGroupObjects());
+    for (var group of listOfGroups) {
+        console.log(JSON.stringify(group));
+    }
+
+    console.log(magentaColor,"\n#======================================================");
     console.log(magentaColor,"# Search group in group results:");
     console.log(magentaColor,"#======================================================");
 
     console.log("Group 3 Path:");
-    var res = treeFuncs.searchGroupInTreeReturnPath(group3_Object);
+    var res = treeFuncs.searchGroupInTreeReturnPath(group3_Object.getID());
     for (var group of res ) {
         console.log(JSON.stringify(group));
     }
     console.log("\nGroup 7 Path:");
-    res = treeFuncs.searchGroupInTreeReturnPath(group7_Object);
+    res = treeFuncs.searchGroupInTreeReturnPath(group7_Object.getID());
     for (var group of res ) {
         console.log(JSON.stringify(group));
     }

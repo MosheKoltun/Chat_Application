@@ -79,7 +79,7 @@ try {
     console.log(magentaColor,"#======================================================");
 
     console.log("Groups associated with user1:");
-    var res = treeFuncs.searchUserInTreeReturnParents(user1_Object);
+    var res = treeFuncs.searchUserInTreeReturnParents(user1_Object.getID());
     //console.log(res);
     for (var group of res ) {
         console.log(JSON.stringify(group));

@@ -28,7 +28,8 @@ function generateGroupID() {
 }
 //=========================================================
 function getGroupObjectAccordingToID(GroupID) {
-    if (!IDsAndGroupObjectsDictionary[GroupID]) {
+    var res = IDsAndGroupObjectsDictionary[GroupID];
+    if (!res) {
         return null;
     }
     // if ID exist
@@ -68,18 +69,14 @@ function removeGroupNotInTree(groupIDToRemove) {
     for(var i=0; i<listOfAllGroupObjects.length; i++) {
         // verify 'groupObjectToRemove' is in list
         if (listOfAllGroupObjects[i] === groupObjectToRemove){
-
             // Disconnect groupObject from all its variables
             // so garbage collector could handle it
             groupObjectToRemove.setGroups([]);
             groupObjectToRemove.setUsers([]);
-
             // Delete an array member from list
             listOfAllGroupObjects.splice(i,1);
-
             // remove group Object from ID list used by generate ID function
             delete IDsAndGroupObjectsDictionary[groupObjectToRemove.getID()];
-
             return true;
         }
     }

@@ -21,38 +21,6 @@ try {
     console.log(JSON.stringify(userFuncs.createNewUser("user4", "", 34)));
     console.log(JSON.stringify(userFuncs.createNewUser("user5", "", 34)));
 
-    console.log("\n#======================================================");
-    console.log("# After username updates:");
-    console.log("# user5 changed to user6");
-    console.log("#======================================================");
-    console.log(userFuncs.updateUsername("user5", "user6"));
-    console.log(userFuncs.updateUserAge("user6", 26));
-
-    console.log("\n#======================================================");
-    console.log("> Have user6 changed?")
-    console.log("#======================================================");
-    console.log(userFuncs.doesUserExist("user6"));
-
-    console.log("\n#======================================================");
-    console.log("> Does user1 exist?")
-    console.log("#======================================================");
-    console.log(JSON.stringify(userFuncs.doesUserExist("user1")));
-
-    console.log(redColor,"\n#======================================================");
-    console.log(redColor,"# After deleting user1:");
-    console.log(redColor,"#======================================================");
-    console.log(userFuncs.removeUser("user1"));
-
-    console.log("\n#======================================================");
-    console.log("> Does user1 exist?")
-    console.log("#======================================================");
-    console.log(userFuncs.doesUserExist("user1"));
-
-    console.log("\n#======================================================");
-    console.log("# List of usernames =");
-    console.log("#======================================================");
-    console.log(userFuncs.getListOfAllUserObjects());
-
     console.log(cyanColor,"\n#======================================================");
     console.log(cyanColor,"# After creating new groups (group1 till group10):");
     console.log(cyanColor,"#======================================================");
@@ -87,12 +55,6 @@ try {
     console.log(treeFuncs.addUserToGroup(1, 3));
     console.log(treeFuncs.addUserToGroup(2, 4));
     console.log(treeFuncs.addUserToGroup(2, 2));
-
-    console.log(redColor,"\n#======================================================");
-    console.log(redColor,"# After trying to remove user that does not exist from group:");
-    console.log(redColor,"# user4 to group2:");
-    console.log(redColor,"#======================================================");
-    console.log(JSON.stringify(treeFuncs.removeUserFromGroup(2, 4)));
 
     console.log(blueColor,"\n#======================================================");
     console.log(blueColor,"# PRINTING TREE:");

@@ -42,7 +42,7 @@ try {
     console.log(JSON.stringify(treeFuncs.addGroupToGroup(0, 8)));
 
     console.log(greenColor,"\n#======================================================");
-    console.log(greenColor,"# After adding group1 to group2:");
+    console.log(greenColor,"# After adding group1 to group9:");
     console.log(greenColor,"#======================================================");
     console.log(JSON.stringify(treeFuncs.addGroupToGroup(9, 1)));
 

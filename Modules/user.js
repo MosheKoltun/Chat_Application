@@ -1,16 +1,11 @@
 module.exports = User;
 //========================================================
 function User(userID, username, password, age) {
-    //this.objectType = "user";
     this.userID = userID;
     this.username = username;
     this.password = password;
     this.age = age;
 }
-//========================================================
-// User.prototype.getObjectType = function () {
-//     return this.objectType;
-// };
 //========================================================
 User.prototype.getID = function () {
     return this.userID;

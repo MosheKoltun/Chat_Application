@@ -126,10 +126,10 @@ function showChatMenu() {
             case '2': removeUserFromGroupWithQuestion(); break;
             case '3': addGroupToGroupWithQuestion(); break;
             case '4': removeGroupHierarchyWithQuestion(); break;
-            case '5': break;
+            case '5': flattenGroupWithQuestion(); break;
             case '6': printGroupsUsersDisplayTree(); break;
-            case '7': break;
-            case '8': break;
+            case '7': searchGroupInTreeReturnPathWithQuestion(); break;
+            case '8': searchUserInTreeReturnParentsWithQuestion(); break;
             case '9': showMainMenu(); break;
             default: showChatMenu() /* show menu again if input does not match */;
         }
@@ -257,9 +257,7 @@ function printListOfUserNames() {
     console.clear();
     var listOfAllUserObjects = treeFuncs.getListOfAllUserObjects();
     for(var i=0; i<listOfAllUserObjects.length; i++) {
-        var username = listOfAllUserObjects.getUserName();
-        var userID = listOfAllUserObjects.getID();
-        console.log(userID + " : " + username);
+        console.log(JSON.stringify(listOfAllUserObjects[i]));
     }
     menu.question('Press any key to continue...', processInput1);
 
@@ -308,7 +306,7 @@ function removeGroupNotInTreeWithQuestion() {
     }
 
     function processInput3() {
-        showChatMenu();
+        showGroupsMenu();
     }
 }
 //===========================================================================
@@ -318,7 +316,7 @@ function printListOfGroupNames() {
     console.clear();
     var listOfAllGroupObjects = treeFuncs.getListOfAllGroupObjects();
     for(var i=0; i<listOfAllGroupObjects.length; i++) {
-        console.log(listOfAllGroupObjects[i].getGroupName());
+        console.log(JSON.stringify(listOfAllGroupObjects[i]));
     }
     menu.question('Press any key to continue...', processInput1);
 
@@ -374,9 +372,8 @@ function removeUserFromGroupWithQuestion() {
 
     function processInput2(input) {
         userID = input;
-
         var res = treeFuncs.removeUserFromGroup(groupID, userID);
-        if (res){
+        if (res !== null){
             console.log('User was successfully removed from the group!');
         } else {
             console.log('Group/User name does not exist!');
@@ -432,6 +429,82 @@ function removeGroupHierarchyWithQuestion() {
         var res = treeFuncs.removeGroupHierarchy(groupToRemoveID);
         if (!!res){
             console.log('Group was successfully removed!');
+        } else {
+            console.log('Failed!');
+        }
+        menu.question('Press any key to continue...', processInput3);
+    }
+
+    function processInput3() {
+        showChatMenu();
+    }
+}
+//===========================================================================
+// flattenGroupWithQuestion
+//===========================================================================
+function flattenGroupWithQuestion() {
+    console.clear();
+
+    menu.question('Please enter ID of group to flatten:\n', processInput1);
+
+    function processInput1(groupToFlattenID) {
+
+        var res = treeFuncs.flattenGroup(groupToFlattenID);
+        if (!!res){
+            console.log('Group was successfully flatten!');
+        } else {
+            console.log('Failed!');
+        }
+        menu.question('Press any key to continue...', processInput3);
+    }
+
+    function processInput3() {
+        showChatMenu();
+    }
+}
+//===========================================================================
+// searchUserInTreeReturnParentsWithQuestion
+//===========================================================================
+function searchUserInTreeReturnParentsWithQuestion() {
+    console.clear();
+
+    menu.question('Please enter user ID to search parents:\n', processInput1);
+
+    function processInput1(userID) {
+// check if bug fixed
+        var res = treeFuncs.searchUserInTreeReturnParents(userID);
+        if (!!res){
+            console.log('Parents of user are:');
+            for (var group of res) {
+                console.log(JSON.stringify(group));
+            }
+        } else {
+            console.log('Failed!');
+        }
+        menu.question('Press any key to continue...', processInput3);
+    }
+
+    function processInput3() {
+        showChatMenu();
+    }
+}
+//===========================================================================
+// searchGroupInTreeReturnPathWithQuestion
+//===========================================================================
+function searchGroupInTreeReturnPathWithQuestion() {
+    console.clear();
+
+    menu.question('Please enter ID of group to search path:\n', processInput1);
+
+    function processInput1(groupID) {
+
+        // check if bug fixed
+        var res = treeFuncs.searchGroupInTreeReturnPath(groupID);
+        if (!!res){
+            console.log('Path of group is:');
+            for (var group of res) {
+                console.log(JSON.stringify(group));
+            }
         } else {
             console.log('Failed!');
         }

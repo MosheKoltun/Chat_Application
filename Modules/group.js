@@ -1,7 +1,6 @@
 module.exports = Group;
 //========================================================
 function Group(groupID, name, users, groups) {
-    //this.objectType = "group";
     this.groupID = groupID;
     this.name = name;
     this.users = users || [];

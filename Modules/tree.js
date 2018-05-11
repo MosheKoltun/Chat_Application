@@ -77,8 +77,13 @@ function removeUserFromGroup(groupID, userID){
     var childrenOfParentGroupObject = groupObject.getUsers();
     for (var i = 0; i < childrenOfParentGroupObject.length; i++) {
         if (childrenOfParentGroupObject[i] === userObject) {
+            // notice Group.removeUser return null if succeeded
             var res = groupObject.removeUser(userObject);
-            return res;
+            if (res === null) {
+                return groupObject;
+            } else {
+                return null;
+            }
         }
     }
     return null;
@@ -128,12 +133,21 @@ function addGroupToGroup(parentGroupID, childGroupID) {
 //=========================================================
 //remove all groups in sub tree to avoid memory leakage
 function removeGroupHierarchy (groupToRemoveID) {
-    var groupToRemove = groupFuncs.removeGroupRecursion(groupToRemoveID);
+    // get group Object and check if it exists
+    var groupToRemove = groupFuncs.getGroupObjectAccordingToID(groupToRemoveID);
     if (groupToRemove === null) {
-        return false;
+        return null;
     }
     // find group parent
     var groupParent = findGroupParent(groupToRemove);
+    if (groupParent === null) {
+        return false;
+    }
+    //remove all groups in sub tree to avoid memory leakage
+    var res = groupFuncs.removeGroupRecursion(groupToRemoveID);
+    if (res === null) {
+        return false;
+    }
     // remove reference of group inside parent
     groupParent.removeGroup(groupToRemove);
     return true;
@@ -143,7 +157,7 @@ function removeGroupHierarchy (groupToRemoveID) {
 //=========================================================
 function findGroupParent(childGroup) {
     // search for group parent in tree
-    var path = searchGroupInTreeReturnPath(childGroup);
+    var path = searchGroupInTreeReturnPath(childGroup.getID());
     if (path.length === 0) {
         return null;
     }
@@ -151,32 +165,6 @@ function findGroupParent(childGroup) {
     var groupParent = path[0];
     return groupParent;
 }
-// //=========================================================
-// // removeGroupFromGroup
-// //=========================================================
-// function removeGroupFromGroup(parentGroupID, childGroupID){
-//     // check if parent group exists
-//     var parentGroupObject = groupFuncs.getGroupObjectAccordingToID(parentGroupID);
-//     if (parentGroupObject === null) {
-//         return null;
-//     }
-//     // check if child group exists
-//     var childGroupObject = groupFuncs.getGroupObjectAccordingToID(childGroupID);
-//     if (childGroupObject === null) {
-//         return null;
-//     }
-//     //remove group
-//     var children = parentGroupObject.getGroups();
-//     for (var i = 0; i < children.length; i++) {
-//         if (children[i] === childGroupObject) {
-//             //remove reference of child group inside parent group
-//             parentGroupObject.removeGroup(childGroupObject);
-//             return true;
-//         }
-//     }
-//     return false;
-// }
-
 //=========================================================
 // flattenGroup
 //=========================================================
@@ -220,7 +208,12 @@ function flattenGroup(groupIDToFlatten) {
 //=========================================================
 // this function unlike searchGroupInTreeReturnPath will return an array
 // of groups parents of the user instead of path
-function searchUserInTreeReturnParents(userToSearch) {
+function searchUserInTreeReturnParents(userIDToSearch) {
+    // get user Object and check if it exists
+    var userToSearch = userFuncs.getUserObjectAccordingToID(userIDToSearch);
+    if (userToSearch === null) {
+        return [];
+    }
     //clearing global variable
     arrayOfUserSearchResults.length = 0;
     //calling the recursive search function
@@ -253,7 +246,12 @@ function searchUserRecursion(root, userToSearch) {
 //=========================================================
 // searchGroupInTreeReturnPath
 //=========================================================
-function searchGroupInTreeReturnPath(groupToSearch) {
+function searchGroupInTreeReturnPath(groupIDToSearch) {
+    // get group Object and check if it exists
+    var groupToSearch = groupFuncs.getGroupObjectAccordingToID(groupIDToSearch);
+    if (groupToSearch === null) {
+        return [];
+    }
     //clearing global variable
     arrayOfGroupSearchResults.length = 0;
     //calling the recursive search function
@@ -284,42 +282,34 @@ function searchGroupRecursion(root, groupToSearch) {
 //=========================================================
 function printTree() {
     var str = "";
-    var headNumOfChildren = head.getGroups().length;
+    var numberOfChildren = head.getGroups().length;
+    if (numberOfChildren === 0) {
+        numberOfChildren = head.getUsers().length;
+    }
     console.log("|---->\\ " + head.getGroupName() +
-        "(GroupID " + head.getID() + ") "+headNumOfChildren);
-    printTreeRecursion (head, str);
+        "(GroupID " + head.getID() + ") " + numberOfChildren);
+    printTreeRecursion(head, str);
 }
 //---------------------------------------------------------
-function printTreeRecursion(parentObject, str) {
+function printTreeRecursion(root, str) {
     str += "      ";
-    var children = parentObject.getGroups();
-
-    for (var i = 0; i < children.length; i++) {
-        var child = children[i];
-        var usersArray = child.getUsers();
-
-        //if we reached leafs
-        if (usersArray.length !== 0) {
-            // print last group
-            console.log(str + "^---->\\ " + child.getGroupName() +
-                "(GroupID " + child.getID() + ") "+usersArray.length);
-
-            //print users
-            for (var j=0; j<usersArray.length; j++) {
-                var aUser = usersArray[j];
-                console.log(str + "      ^----> " + aUser.getUserName() +
-                    "(UserID " + aUser.getID() + ")");
+    if (root !== null) {
+        var rootChildren = root.getGroups();
+        if (rootChildren.length !== 0) {
+            for (var i = 0; i < rootChildren.length; i++) {
+                console.log(str + "|---->\\ " + rootChildren[i].getGroupName() +
+                    "(GroupID " + rootChildren[i].getID() + ") " + rootChildren.length);
+                printTreeRecursion(rootChildren[i], str);
             }
-            //console.log(str + "|")
-            console.log();
-
-        // print groups
-        } else {
-            var groupName = child.getGroupName();
-            var groupNumOfChildren = child.getGroups().length;
-            console.log(str + "^---->\\ " + groupName +
-                "(GroupID " + child.getID() + ") "+groupNumOfChildren);
-            printTreeRecursion(child, str);
+        }
+        else {
+            var rootChildren = root.getUsers();
+            if (rootChildren.length !== 0) {
+                for (var i = 0; i < rootChildren.length; i++) {
+                    console.log(str + "^----> " + rootChildren[i].getUserName() +
+                        "(UserID " + rootChildren[i].getID() + ") " + rootChildren.length);
+                }
+            }
         }
     }
 }
