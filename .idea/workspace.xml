@@ -2,18 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2764cd33-e3a9-4b96-85be-2f04521caa02" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/Tests/test_adding_group_inside_group_of_users" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tests/test_remove_group_not_inside_tree.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tests/test_remove_groups_hierarchy.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tests/test_search_groups.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controlers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/Controlers/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Modules/group.js" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/group.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Modules/groups.js" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/groups.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modules/test_flatten_group.js" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/test_flatten_group.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Modules/tree.js" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/tree.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/test_add_remove_update_users.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/test_search_1.js" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/test_clone_hierarchy.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/test_user_parents_1.js" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/test_flatten_group.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/test_remove_group_not_inside_tree.js" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/test_remove_group_not_inside_tree.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/test_remove_groups_hierarchy.js" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/test_remove_groups_hierarchy.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -30,20 +22,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Controlers/index.js">
+      <file leaf-file-name="tree.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Modules/tree.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2295">
-              <caret line="135" column="7" selection-start-line="135" selection-start-column="7" selection-end-line="135" selection-end-column="7" />
+            <state relative-caret-position="307">
+              <caret line="214" column="52" selection-start-line="214" selection-start-column="52" selection-end-line="214" selection-end-column="52" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tree.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Modules/tree.js">
+      <file leaf-file-name="test_remove_groups_hierarchy.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Tests/test_remove_groups_hierarchy.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="670">
-              <caret line="213" column="1" lean-forward="true" selection-start-line="213" selection-start-column="1" selection-end-line="213" selection-end-column="1" />
+            <state relative-caret-position="864">
+              <caret line="87" column="36" lean-forward="true" selection-start-line="87" selection-start-column="36" selection-end-line="87" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -51,26 +43,8 @@
       <file leaf-file-name="groups.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Modules/groups.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="506">
-              <caret line="106" column="9" selection-start-line="106" selection-start-column="9" selection-end-line="106" selection-end-column="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="group.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Modules/group.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="32" column="24" selection-start-line="32" selection-start-column="16" selection-end-line="32" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test_flatten_group.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Modules/test_flatten_group.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="547">
-              <caret line="98" column="4" selection-start-line="98" selection-start-column="4" selection-end-line="98" selection-end-column="4" />
+            <state relative-caret-position="1006">
+              <caret line="119" column="5" lean-forward="true" selection-start-line="119" selection-start-column="5" selection-end-line="119" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -163,16 +137,17 @@
         <option value="$PROJECT_DIR$/Tests/test_cloneHierarchy.js" />
         <option value="$PROJECT_DIR$/Tests/test_search_1.js" />
         <option value="$PROJECT_DIR$/Tests/test_search_groups.js" />
-        <option value="$PROJECT_DIR$/Tests/test_clone_hierarchy.js" />
         <option value="$PROJECT_DIR$/Tests/test_add_remove_update_users.js" />
         <option value="$PROJECT_DIR$/Tests/test_search_user.js" />
-        <option value="$PROJECT_DIR$/Tests/test_remove_groups_hierarchy.js" />
         <option value="$PROJECT_DIR$/Modules/groups.js" />
-        <option value="$PROJECT_DIR$/Tests/test_remove_group_not_inside_tree.js" />
         <option value="$PROJECT_DIR$/Tests/test_adding_group_inside_group_of_users" />
         <option value="$PROJECT_DIR$/Controlers/index.js" />
         <option value="$PROJECT_DIR$/Modules/test_flatten_group.js" />
+        <option value="$PROJECT_DIR$/Tests/test_clone_hierarchy.js" />
+        <option value="$PROJECT_DIR$/Tests/test_flatten_group.js" />
         <option value="$PROJECT_DIR$/Modules/tree.js" />
+        <option value="$PROJECT_DIR$/Tests/test_remove_group_not_inside_tree.js" />
+        <option value="$PROJECT_DIR$/Tests/test_remove_groups_hierarchy.js" />
       </list>
     </option>
   </component>
@@ -196,7 +171,30 @@
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Chat" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Chat" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Chat" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Chat" type="462c0819:PsiDirectoryNode" />
+              <item name="Modules" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Chat" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Chat" type="462c0819:PsiDirectoryNode" />
+              <item name="Tests" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -231,26 +229,26 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Node.js.test_flatten_group.js">
-    <configuration name="test_adding_group_inside_group_of_users" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="test_adding_group_inside_group_of_users" working-dir="$PROJECT_DIR$/Tests" />
-    <configuration name="test_flatten_group.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="test_flatten_group.js" working-dir="$PROJECT_DIR$/Modules" />
+  <component name="RunManager" selected="Node.js.test_remove_groups_hierarchy.js">
+    <configuration name="test_flatten_group.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="test_flatten_group.js" working-dir="$PROJECT_DIR$/Tests" />
     <configuration name="test_remove_group_not_inside_tree.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="test_remove_group_not_inside_tree.js" working-dir="$PROJECT_DIR$/Tests" />
     <configuration name="test_remove_groups_hierarchy.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="test_remove_groups_hierarchy.js" working-dir="$PROJECT_DIR$/Tests" />
+    <configuration name="test_search_groups.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="test_search_groups.js" working-dir="$PROJECT_DIR$/Tests" />
     <configuration name="test_search_user.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="test_search_user.js" working-dir="$PROJECT_DIR$/Tests" />
     <list>
-      <item itemvalue="Node.js.test_search_user.js" />
       <item itemvalue="Node.js.test_remove_group_not_inside_tree.js" />
-      <item itemvalue="Node.js.test_adding_group_inside_group_of_users" />
-      <item itemvalue="Node.js.test_flatten_group.js" />
       <item itemvalue="Node.js.test_remove_groups_hierarchy.js" />
+      <item itemvalue="Node.js.test_search_groups.js" />
+      <item itemvalue="Node.js.test_search_user.js" />
+      <item itemvalue="Node.js.test_flatten_group.js" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Node.js.test_flatten_group.js" />
         <item itemvalue="Node.js.test_remove_groups_hierarchy.js" />
-        <item itemvalue="Node.js.test_adding_group_inside_group_of_users" />
-        <item itemvalue="Node.js.test_search_user.js" />
         <item itemvalue="Node.js.test_remove_group_not_inside_tree.js" />
+        <item itemvalue="Node.js.test_flatten_group.js" />
+        <item itemvalue="Node.js.test_search_user.js" />
+        <item itemvalue="Node.js.test_search_groups.js" />
       </list>
     </recent_temporary>
   </component>
@@ -274,12 +272,12 @@
       <workItem from="1525674396695" duration="66708000" />
       <workItem from="1525864626187" duration="2054000" />
       <workItem from="1525874553219" duration="69233000" />
-      <workItem from="1526062752027" duration="3183000" />
+      <workItem from="1526062752027" duration="4536000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="251863000" />
+    <option name="totallyTimeSpent" value="253216000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -292,14 +290,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="815" height="1255" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="2" sideWeight="0.49029127" weight="0.32904884" />
+      <window_info content_ui="combo" id="Project" order="2" sideWeight="0.49029127" visible="true" weight="0.0" />
       <window_info anchor="bottom" id="TODO" order="7" weight="0.32886505" />
       <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="3" weight="0.3291592" />
-      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.15728329" />
+      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.21537086" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="1" weight="0.3291592" />
       <window_info id="Favorites" order="0" sideWeight="0.50970876" side_tool="true" weight="0.32904884" />
@@ -357,16 +354,16 @@
           <option name="timeStamp" value="84" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/Modules/test_flatten_group.js</url>
-          <line>98</line>
+          <url>file://$PROJECT_DIR$/Tests/test_flatten_group.js</url>
+          <line>109</line>
           <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="87" />
+          <option name="timeStamp" value="88" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="88" />
+      <option name="time" value="89" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -472,41 +469,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Tests/test_add_remove_update_users.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="87" column="48" lean-forward="true" selection-start-line="87" selection-start-column="48" selection-end-line="87" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tests/test_clone_hierarchy.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="30" column="42" selection-start-line="30" selection-start-column="42" selection-end-line="30" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tests/test_search_groups.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="32" lean-forward="true" selection-start-line="12" selection-start-column="32" selection-end-line="12" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tests/test_remove_group_not_inside_tree.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="34" column="49" selection-start-line="34" selection-start-column="49" selection-end-line="34" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tests/test_search_user.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1264">
-          <caret line="80" column="34" selection-end-line="94" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Controlers/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2295">
@@ -514,29 +476,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Tests/test_adding_group_inside_group_of_users">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="65" column="75" selection-end-line="92" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Modules/groups.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="106" column="9" selection-start-line="106" selection-start-column="9" selection-end-line="106" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tests/test_remove_groups_hierarchy.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="82">
-          <caret line="20" column="62" selection-start-line="20" selection-start-column="62" selection-end-line="20" selection-end-column="62" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Modules/group.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -545,17 +486,73 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Modules/test_flatten_group.js">
+    <entry file="file://$PROJECT_DIR$/Tests/test_add_remove_update_users.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="547">
-          <caret line="98" column="4" selection-start-line="98" selection-start-column="4" selection-end-line="98" selection-end-column="4" />
+        <state relative-caret-position="221">
+          <caret line="80" column="29" selection-start-line="80" selection-start-column="29" selection-end-line="80" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tests/test_adding_group_inside_group_of_users">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tests/test_clone_hierarchy.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="48" column="60" selection-start-line="48" selection-start-column="60" selection-end-line="48" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tests/test_search_groups.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="48" lean-forward="true" selection-start-line="2" selection-start-column="48" selection-end-line="2" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tests/test_search_user.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="52" column="26" lean-forward="true" selection-start-line="52" selection-start-column="26" selection-end-line="52" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Modules/groups.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1006">
+          <caret line="119" column="5" lean-forward="true" selection-start-line="119" selection-start-column="5" selection-end-line="119" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tests/test_flatten_group.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="116" selection-start-line="116" selection-end-line="122" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Modules/tree.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="670">
-          <caret line="213" column="1" lean-forward="true" selection-start-line="213" selection-start-column="1" selection-end-line="213" selection-end-column="1" />
+        <state relative-caret-position="307">
+          <caret line="214" column="52" selection-start-line="214" selection-start-column="52" selection-end-line="214" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tests/test_remove_group_not_inside_tree.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="36" selection-start-line="36" selection-end-line="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tests/test_remove_groups_hierarchy.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="864">
+          <caret line="87" column="36" lean-forward="true" selection-start-line="87" selection-start-column="36" selection-end-line="87" selection-end-column="36" />
         </state>
       </provider>
     </entry>

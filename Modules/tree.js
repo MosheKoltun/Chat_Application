@@ -211,6 +211,9 @@ function flattenGroup(groupIDToFlatten) {
             groupParent.addGroup(childrenGroups[j]);
         }
     }
+    // remove group to avoid memory leakage
+    groupFuncs.removeGroupNotInTree(groupIDToFlatten);
+    return groupParent;
 }
 //=========================================================
 // searchUserInTreeReturnParents

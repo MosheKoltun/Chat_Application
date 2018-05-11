@@ -24,7 +24,7 @@ try {
     treeFuncs.printTree();
 
     console.log(redColor,"\n#======================================================");
-    console.log(redColor,"# After removing group1 from groups:");
+    console.log(redColor,"# After removing group1 group2 and group3 from groups:");
     console.log(redColor,"#======================================================");
 
     console.log(groupFuncs.removeGroupNotInTree(1));
@@ -34,6 +34,13 @@ try {
     console.log("\nHere you should expect to get 'false':");
     console.log(groupFuncs.removeGroupNotInTree(1));
 
+    console.log(magentaColor,"\n#======================================================");
+    console.log(magentaColor,"# Get list of groups");
+    console.log(magentaColor,"#======================================================");
+    var listOfGroups = (groupFuncs.getListOfAllGroupObjects());
+    for (var group of listOfGroups) {
+        console.log(JSON.stringify(group));
+    }
 
     console.log("\n======================================================");
     console.log(greenColor,'PASS!');

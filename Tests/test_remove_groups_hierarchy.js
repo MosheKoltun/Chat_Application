@@ -72,6 +72,14 @@ try {
     console.log(blueColor,"#======================================================");
     treeFuncs.printTree();
 
+    console.log(magentaColor,"\n#======================================================");
+    console.log(magentaColor,"# Get list of groups");
+    console.log(magentaColor,"#======================================================");
+    var listOfGroups = (groupFuncs.getListOfAllGroupObjects());
+    for (var group of listOfGroups) {
+        console.log(JSON.stringify(group));
+    }
+
     console.log("\n======================================================");
     console.log(greenColor,'PASS!');
 }
